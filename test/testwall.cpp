@@ -1,5 +1,5 @@
-#ifndef TESTAMULET_H
-#define TESTAMULET_H
+#ifndef TESTWALL_H
+#define TESTWALL_H
 
 #include "doctest.h"
 #include "position.h"
@@ -17,3 +17,6 @@ TEST_CASE("Test de la classe wall")
         REQUIRE_EQ(w.getPosition().getColumn(),j);
     }
 }
+
+
+#endif
