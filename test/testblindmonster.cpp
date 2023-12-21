@@ -5,17 +5,19 @@
 #include "position.h"
 #include "blindMonster.h"
 
-TEST_CASE("Test de la classe BlindMonster")
+TEST_CASE("Test de la classe smart monster")
 {
-    int i=1,j=2;
-    position p{i,j};
-    blindMonster bm{p};
 
     SUBCASE("Test constructeur")
     {
-        REQUIRE_EQ(bm.getPosition().getLine(),i);
-        REQUIRE_EQ(bm.getPosition().getColumn(),j);
+        position pos{0,1};
+        blindMonster b{pos};
+
+        REQUIRE_EQ(b.getPosition().getLine(),0);
+        REQUIRE_EQ(b.getPosition().getColumn(),1);
+
     }
+    
 }
 
 
