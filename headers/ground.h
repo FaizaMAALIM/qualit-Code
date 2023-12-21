@@ -32,6 +32,8 @@ class ground
         ground(); 
         ground(int nbl,int nbc); 
         void buildGround();
+        void importGround(std::istream &ist);
+
 
        
         int getNbColumns() const; 
