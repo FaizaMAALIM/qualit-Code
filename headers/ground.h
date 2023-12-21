@@ -33,6 +33,8 @@ class ground
         ground(int nbl,int nbc); 
         void buildGround();
         void importGround(std::istream &ist);
+        void exportGround();
+
 
         char typeOf(int indice) const; 
         std::vector<int> getIndicePos(const position &p) const;  //test ok

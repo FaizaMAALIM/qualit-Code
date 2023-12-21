@@ -338,3 +338,28 @@ int ground::getIndiceElmt(const position &p,char type) const
     }
     return 0;
 }
+
+void ground::exportGround()
+    {
+        position p;
+        int nbElmt,indice;
+        char t;
+        std::ofstream fichier("Terrain.txt");
+        fichier<<d_nbLines<<" "<<d_nbColumns<<"\n";
+
+        for(int i=0;i<d_nbLines;i++)
+        {
+            for(int j=0; j<d_nbColumns;j++)
+            {
+                p={i,j};
+                indice = indicePos(p);
+                t = typeOf(indice);
+
+                fichier<<t<<" ";
+
+
+
+            }
+            fichier<<"\n";
+        }
+    }
