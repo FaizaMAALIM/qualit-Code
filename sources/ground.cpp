@@ -320,3 +320,21 @@ position  ground::getAdventurerPosition() const
 
     return {-1,-1};
 }
+
+int ground::nbElmtsPos(const position &p) const
+{
+    std::vector<int>elm= getIndicePos(p);
+    return elm.size();
+}
+
+int ground::getIndiceElmt(const position &p,char type) const
+{
+    for(int i=0;i<d_groundElementsTab.size();i++)
+    {
+        if(typeOf(i)==type && posOf(i).getColumn()==p.getColumn() && posOf(i).getLine()==p.getLine())
+        {
+            return i;
+        }
+    }
+    return 0;
+}

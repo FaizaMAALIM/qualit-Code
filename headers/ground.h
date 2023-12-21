@@ -45,6 +45,8 @@ class ground
         void display(std::unique_ptr<viewManager> &view);
         int indicePos(const position &p) const; 
 
+        int nbElmtsPos(const position &p) const;
+        int getIndiceElmt(const position &p,char type) const; 
        
         int getNbColumns() const; 
         int getNbLines() const;   
