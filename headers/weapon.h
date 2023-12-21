@@ -1,17 +1,17 @@
 #ifndef WEAPON_H_INCLUDED
 #define WEAPON_H_INCLUDED
 
-// CLASSE REPRESENTANT UNE ARME (epee et armure)
 
 
 class weapon
 {
     public:
         virtual ~weapon()=default;
-        virtual void use()=0;
-        int getSolidity() const;
+        weapon(double solidite);
+        double getSolidity() const;
+        void setSolidity(double nouvforce);
     private:
-        int d_solidity;
+        double d_solidity;
 
 };
 
