@@ -198,3 +198,45 @@ void ground::importGround(std::istream &ist)
 
 
     }
+    
+char  ground::typeOf(int indice) const
+{
+   
+    auto e= d_groundElementsTab[indice].get();
+    char t;
+
+    if(indice==-1)  
+    {
+        t= 'E';
+    }
+    else if(dynamic_cast<blindMonster*>(e))
+    {
+        t= 'B';
+    }
+    else if(dynamic_cast<amulet*>(e))
+    {
+        t= 'A';
+    }
+    else if(dynamic_cast<adventurer*>(e))
+    {
+        t= 'P';
+    }
+    else if(dynamic_cast<smartMonster*>(e))
+    {
+        t= 'S';
+    }
+    else if(dynamic_cast<wall*>(e))
+    {
+        t= 'W';
+    }
+    else if(dynamic_cast<door*>(e))
+    {
+        t='D';
+    }
+    else if(dynamic_cast<outside*>(e))
+    {
+        t='O';
+    }
+    return t;
+
+}

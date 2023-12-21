@@ -34,6 +34,16 @@ TEST_CASE("Test de la classe ground")
     {
         REQUIRE_EQ(g.getNbTotalElmts(),0);
     }
+    SUBCASE("Test type de la case")
+    {
+        position p{1,1};
+
+        auto adv = std::make_unique<adventurer>(p);
+        g.addElementToGround(std::move(adv));
+        char t=g.typeOf(0);
+        REQUIRE_EQ(t,'P');
+
+    }
 }
 
 #endif

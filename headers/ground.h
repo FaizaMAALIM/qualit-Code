@@ -34,6 +34,8 @@ class ground
         void buildGround();
         void importGround(std::istream &ist);
 
+        char typeOf(int indice) const; 
+
 
        
         int getNbColumns() const; 
