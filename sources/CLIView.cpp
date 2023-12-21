@@ -33,6 +33,10 @@ void CLIView::displayDoor(const door &d) const
     cout<<" ^ ";
 }
 
+void CLIView::displayOutside(const outside &o) const 
+{
+    cout<<" ~ ";
+}
 
 
 
