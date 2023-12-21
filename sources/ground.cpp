@@ -267,3 +267,28 @@ position ground::posOf(int indice) const
     auto e= d_groundElementsTab[indice].get();
     return e->getPosition();
 }
+
+void ground::display(std::unique_ptr<viewManager> &view) 
+{
+    view->displayGround(*this);
+}
+
+int ground::indicePos(const position &p) const
+{
+    int indice=0;
+    position pos;
+   
+    for(const auto &elem : d_groundElementsTab)
+    {
+        pos = elem->getPosition();
+
+        if( pos.getColumn()==p.getColumn() && pos.getLine()==p.getLine())
+        {
+            return indice;
+        }
+
+        indice++;
+    }
+    return -1; //Si personne dans le tableau nest a cette pos
+
+}
