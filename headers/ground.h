@@ -35,8 +35,10 @@ class ground
         void importGround(std::istream &ist);
 
         char typeOf(int indice) const; 
+        std::vector<int> getIndicePos(const position &p) const;  //test ok
 
 
+        
        
         int getNbColumns() const; 
         int getNbLines() const;   

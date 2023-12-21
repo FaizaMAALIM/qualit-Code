@@ -240,3 +240,24 @@ char  ground::typeOf(int indice) const
     return t;
 
 }
+
+std::vector<int> ground::getIndicePos(const position &p) const
+{
+    int indice=0;
+    position pos;
+    std::vector<int>T;
+
+    for(const auto &elem : d_groundElementsTab)
+    {
+        pos = elem->getPosition();
+
+        if( (pos.getColumn()==p.getColumn()) && (pos.getLine()==p.getLine()))
+        {
+            T.push_back(indice);
+        }
+
+        indice++;
+    }
+    
+    return T;
+}
