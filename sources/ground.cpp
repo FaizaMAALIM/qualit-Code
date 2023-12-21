@@ -261,3 +261,9 @@ std::vector<int> ground::getIndicePos(const position &p) const
     
     return T;
 }
+
+position ground::posOf(int indice) const
+{
+    auto e= d_groundElementsTab[indice].get();
+    return e->getPosition();
+}

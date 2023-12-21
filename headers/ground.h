@@ -36,6 +36,7 @@ class ground
 
         char typeOf(int indice) const; 
         std::vector<int> getIndicePos(const position &p) const;  //test ok
+        position posOf(int indice) const;
 
 
         
