@@ -14,6 +14,12 @@ TEST_CASE("Test de la classe Position")
         REQUIRE_EQ(p.getLine(),0);
         REQUIRE_EQ(p.getColumn(),0);
     }
+    SUBCASE("Test constructeur")
+    {
+        position p{23,10};
+        REQUIRE_EQ(p.getLine(),23);
+        REQUIRE_EQ(p.getColumn(),10);
+    }
     SUBCASE("Test getLine")
     {
         REQUIRE_EQ(p.getLine(),i);
@@ -21,6 +27,19 @@ TEST_CASE("Test de la classe Position")
     SUBCASE("Test getColonne")
     {
         REQUIRE_EQ(p.getColumn(),j);
+    }
+    SUBCASE("Test opérateur d'affectation")
+    {
+        position p1{0,3};
+        position p2 = p1;
+        REQUIRE_EQ(p1.getLine(),p2.getLine());
+        REQUIRE_EQ(p1.getColumn(),p2.getColumn());
+    }
+    SUBCASE("Test opérateur d'égalité")
+    {
+        position p1{0,3};
+        position p2{0,3};
+        REQUIRE_EQ(p1==p2,true);
     }
 }
 
