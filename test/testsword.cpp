@@ -7,6 +7,14 @@
 
 TEST_CASE("Test de la classe sword")
 {
+
+    SUBCASE("Test constructeur")
+    {
+        int sol=10;
+        sword s{sol};
+
+        REQUIRE_EQ(s.getSolidity(),10);
+    }
     
 }
 
