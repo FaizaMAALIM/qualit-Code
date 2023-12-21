@@ -1,6 +1,5 @@
 #include "adventurer.h"
 #include "viewManager.h"
-#include "attackManager.h"
 
 adventurer::adventurer(const position &pos,double swordSolidity,double armorySolidity):character{pos},d_sword{swordSolidity},d_armor{armorySolidity}{}
 

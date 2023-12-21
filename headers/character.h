@@ -2,7 +2,6 @@
 #define CHARACTER_H_INCLUDED
 #include "groundElement.h"
 #include "position.h"
-class attackManager;
 class ground;
 
 //CLASS REPRESENTANT UN PERSONNAGE DU TERRAIN ( monstres ou aventurier )

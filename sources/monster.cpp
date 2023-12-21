@@ -1,7 +1,6 @@
 #include "monster.h"
 #include "viewManager.h"
 #include <iostream>
-#include "attackManager.h"
 #include "ground.h"
         
 monster::monster(const position &pos, double hability) : character{pos},d_hability{hability} {}
