@@ -59,3 +59,4 @@ void ground::removeElement(int indice)
 {
     d_groundElementsTab.erase(d_groundElementsTab.begin() + indice);
 }
+
