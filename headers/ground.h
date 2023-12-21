@@ -52,7 +52,9 @@ class ground
        
         int getNbColumns() const; 
         int getNbLines() const;   
-        int getNbTotalElmts() const; 
+        int getNbTotalElmts() const;
+        const std::vector<std::unique_ptr<groundElement>> & getElementsTable() const;
+ 
 
         void addElementToGround(std::unique_ptr<groundElement> element); 
         void removeElement(int indice); 

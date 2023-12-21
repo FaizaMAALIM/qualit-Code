@@ -363,3 +363,8 @@ void ground::exportGround()
             fichier<<"\n";
         }
     }
+
+const std::vector<std::unique_ptr<groundElement>> &ground::getElementsTable() const
+{
+    return d_groundElementsTab;
+}
