@@ -129,3 +129,72 @@ void ground::buildGround()   //creer un terrain manuellement
         }
     }
 }
+
+void ground::importGround(std::istream &ist)  
+{
+    
+    int nbcol, nbl;
+    char elem;
+
+    ist>>nbl>>nbcol;
+    
+
+        int cptl=0; 
+        int cptc=0;
+        setSize(nbl,nbcol);
+
+        while(!ist.eof() && cptl<d_nbLines && cptc<d_nbColumns)
+        {
+            position pos{cptl,cptc};
+            ist>>elem;
+
+            if(elem=='S') //Monstre voyant a la case [i][j]
+            {
+                auto p = std::make_unique<smartMonster>(pos);
+                addElementToGround(std::move(p));
+            }
+            else if(elem=='B') //Monstre aveugle à la case [i][j]
+            {
+                auto p = std::make_unique<blindMonster>(pos);
+                addElementToGround(std::move(p));
+            }
+            else if(elem=='W') //Mur a la case [i][j]
+            {
+                auto p = std::make_unique<wall>(pos);
+                addElementToGround(std::move(p));
+            }
+            else if(elem=='A') //Amulette à la case [i][j]
+            {
+                auto p = std::make_unique<amulet>(pos);
+                addElementToGround(std::move(p));  
+          
+            }
+            else if(elem=='P') //Personnage
+            {
+                auto p = std::make_unique<adventurer>(pos);
+                addElementToGround(std::move(p));
+
+            }
+            else if(elem=='D') //Porte
+            {
+                auto p = std::make_unique<door>(pos);
+                addElementToGround(std::move(p));
+            }
+            else if(elem=='O') //Dehors
+            {
+                auto p = std::make_unique<outside>(pos);
+                addElementToGround(std::move(p));
+            }
+
+            cptc++;
+
+            if(cptc==nbcol)
+            {
+                cptc=0;
+                cptl++;
+            }
+
+        }
+
+
+    }
