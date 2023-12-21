@@ -40,3 +40,22 @@ int ground::getNbTotalElmts() const
 {
     return d_groundElementsTab.size();
 }
+
+
+void ground::setSize(int length,int width) 
+{
+    d_nbColumns = length;  
+    d_nbLines = width;     
+} 
+
+void ground::addElementToGround(std::unique_ptr<groundElement> element)
+{
+    d_groundElementsTab.push_back(std::move(element));
+}
+
+
+
+void ground::removeElement(int indice)
+{
+    d_groundElementsTab.erase(d_groundElementsTab.begin() + indice);
+}

@@ -31,11 +31,18 @@ class ground
     public:
         ground(); 
         ground(int nbl,int nbc); 
-        
+        void buildGround();
+
        
         int getNbColumns() const; 
         int getNbLines() const;   
         int getNbTotalElmts() const; 
+
+        void addElementToGround(std::unique_ptr<groundElement> element); 
+        void removeElement(int indice); 
+        
+        //test ok
+        void setSize(int length,int width);  
 
     private:
         int d_nbLines; 
