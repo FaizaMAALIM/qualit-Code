@@ -292,3 +292,31 @@ int ground::indicePos(const position &p) const
     return -1; //Si personne dans le tableau nest a cette pos
 
 }
+
+int ground::getIndiceAdventurer() const
+{
+    for(int i=0;i<d_groundElementsTab.size();i++)
+    {
+        if(typeOf(i)=='P')
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+position  ground::getAdventurerPosition() const  
+{
+    for(int i=0;i<d_groundElementsTab.size();i++)
+    {
+        groundElement* element = d_groundElementsTab[i].get();
+        adventurer* adv = dynamic_cast<adventurer*>(element);
+
+         if (adv) {
+            position padv{ adv->getPosition()};
+            return padv;
+         }
+    }
+
+    return {-1,-1};
+}

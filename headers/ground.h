@@ -39,6 +39,9 @@ class ground
         position posOf(int indice) const;
 
 
+        position getAdventurerPosition() const; //position de laventurier 
+        int getIndiceAdventurer() const;
+
         void display(std::unique_ptr<viewManager> &view);
         int indicePos(const position &p) const; 
 
