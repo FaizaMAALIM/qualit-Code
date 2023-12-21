@@ -6,7 +6,7 @@ class wall : public groundElement
 {
     public:
         wall(const position &p);
-        //void display(const viewManager& view) const override;
+        void display(const viewManager& view) const override;
 
 };
 
