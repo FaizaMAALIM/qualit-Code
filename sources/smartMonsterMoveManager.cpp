@@ -69,3 +69,42 @@ position smartMonsterMoveManager::aleatoirePosition()
     int directionAleat = directionsTab[i];
     return directionPosition(directionAleat);
 }
+
+int smartMonsterMoveManager::choixDirection(int d1,int d2,const ground &g)
+{
+   int direction;
+
+   position p1{directionPosition(d1)};
+   position p2{directionPosition(d2)};
+
+   int nbElem1 = g.nbElmtsPos(p1);
+   int nbElem2 = g.nbElmtsPos(p2);
+
+    if(nbElem1>1)
+    {
+        direction = d2;
+    }
+    else if(nbElem2>1)
+    {
+        direction = d1;
+    }
+    else if(nbElem1<2 && nbElem2<2)
+    {
+        int i1=g.indicePos(p1);
+        int i2=g.indicePos(p2);
+
+        char t1=g.typeOf(i1);
+        char t2=g.typeOf(i2);
+
+        if(t1=='W'|| t1=='B' ||t1=='S')
+        {
+            direction = d2;
+        }
+        else
+        {
+            direction = d1;
+        }
+    }
+
+    return direction;
+}
