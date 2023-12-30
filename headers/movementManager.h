@@ -11,7 +11,7 @@ class movementManager
         virtual ~movementManager()=default;
         position getPos() const;
 
-        virtual position
+        virtual position directionPosition(int direction)=0;
 
 
   private:
