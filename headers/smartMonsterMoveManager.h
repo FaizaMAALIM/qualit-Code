@@ -11,6 +11,9 @@ class smartMonsterMoveManager : public movementManager
 
         position directionPosition(int direction) override;
 
+        bool isNearAdventurer(ground &g) const;
+
+
 
 };
 

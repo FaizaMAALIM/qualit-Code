@@ -42,3 +42,17 @@ position smartMonsterMoveManager::directionPosition(int direction)
 
     return p;
 }
+
+//VRAI SI LE MONSTRE EST A - DE 8 CASES DE L AVENTURIER
+bool smartMonsterMoveManager::isNearAdventurer(ground &g) const
+{
+    int lineAdv = g.getAdventurerPosition().getLine();
+    int colAdv = g.getAdventurerPosition().getColumn();
+    int lineMonster = getPos().getLine();
+    int colMonster = getPos().getColumn();
+
+    int difLine=std::abs(lineMonster-lineAdv);
+    int difCol =std::abs(colMonster-colAdv);
+
+    return difLine<8 && difCol<8;
+}
