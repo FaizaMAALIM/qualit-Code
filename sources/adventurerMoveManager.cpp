@@ -8,6 +8,9 @@
 
 adventurerMoveManager::adventurerMoveManager(const position&pos):movementManager{pos}{}
 
+position directionPosition(int direction) override;
+
+
 //nouvelle position après deplacement
 position adventurerMoveManager::directionPosition(int direction)
 {
