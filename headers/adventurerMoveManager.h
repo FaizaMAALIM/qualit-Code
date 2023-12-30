@@ -10,6 +10,8 @@ class adventurerMoveManager : public movementManager
 
         position directionPosition(int direction) override;
 
+         void move(ground &g,int direction) override;
+
 
 
 

@@ -60,3 +60,84 @@ position adventurerMoveManager::directionPosition(int direction)
 
     return p;
 }
+
+
+
+
+void adventurerMoveManager::move(ground&g,int direction)
+{
+    position nouvPos{directionPosition(direction)};
+
+
+    int indiceAdv{g.getIndiceAdventurer()};
+    char type;
+    auto adv=dynamic_cast<adventurer*>(g.getElementsTable()[indiceAdv].get());
+
+    if(nouvPos.getColumn()<g.getNbColumns()&& nouvPos.getColumn()>=0 && nouvPos.getLine()<g.getNbLines() && nouvPos.getLine()>=0)
+    {
+        int indice = g.indicePos(nouvPos);
+
+        type=g.typeOf(indice);
+
+        //SI il ya 2 elmts : forcément l'adv + le monstre
+        if(g.nbElmtsPos(nouvPos)==2)
+        {
+           std::vector<int> tabElmt = g.getIndicePos(nouvPos);
+           for(int i=0; i<tabElmt.size();i++)
+           {
+                if(g.typeOf(tabElmt[i])!='P')
+                {
+                    type = g.typeOf(tabElmt[i]);
+                }
+           }
+        }
+
+
+        if(type=='E') //vide => laventurier y va
+        {
+            adv->changePosition(nouvPos);
+        }
+        else if(type=='S' || type=='B') //MONSTRE => L'AVENTURIER y va + L ATTAQUE
+        {
+            adv->changePosition(nouvPos);
+            int indiceMonstre = g.getIndiceElmt(nouvPos,type);
+            auto monstreptr =  dynamic_cast<monster*>(g.getElementsTable()[indiceMonstre].get());
+
+            adventurerAttackManager advAttackManager;
+            double force = adv->attack(advAttackManager);
+
+            //LE MONSTRE RECOIT UNE ATTAQUE
+            monsterAttackManager mnstrAttackManager;
+            bool mort=monstreptr->receiveAttack(mnstrAttackManager,force);
+
+            if(mort) //SI LE MONSTRE SUCCOMBE A L ATTAQUE
+            {
+                double pfmonstre = monstreptr->forcePoints();
+                double quart = 0.25 * pfmonstre;
+                double reste = pfmonstre - quart;
+
+                adv->setForcePoints(adv->forcePoints()+quart);
+                adv->setLifePoints(adv->lifePoints()+reste);
+
+                g.removeElement(indiceMonstre);
+            }
+        }
+        else if(type=='A') //AMULETTE
+        {
+           g.removeElement(indice);
+           adv->changePosition(nouvPos);
+           adv->setAmuletTrue();
+
+        }
+        else if(type=='D') //case de sortie
+        {
+            if(adv->hasAmulet())
+            {
+                adv->setIsOutTrue();
+            }
+
+        }
+
+
+    }
+
