@@ -56,3 +56,16 @@ bool smartMonsterMoveManager::isNearAdventurer(ground &g) const
 
     return difLine<8 && difCol<8;
 }
+
+position smartMonsterMoveManager::aleatoirePosition()
+{
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::vector<int> directionsTab = {2, 4, 6, 8};
+    std::uniform_int_distribution<> distrib(0, directionsTab.size() - 1);
+    int i = distrib(gen);
+
+    int directionAleat = directionsTab[i];
+    return directionPosition(directionAleat);
+}
