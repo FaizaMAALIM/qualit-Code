@@ -8,6 +8,10 @@ class adventurerMoveManager : public movementManager
     public:
         adventurerMoveManager(const position&pos);
 
+        position directionPosition(int direction) override;
+
+
+
 
 };
 
