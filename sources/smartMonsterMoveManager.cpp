@@ -237,3 +237,87 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
 }
 
 
+void smartMonsterMoveManager::move(ground &g,int direction)
+{
+
+    if(isNearAdventurer(g)) // SI MONSTRE = -8 CASES AVENTURIER
+    {
+        position p{possiblePosition(g)};
+
+        if(p.getColumn()!=-1 && p.getLine()!=-1 && p.getColumn()<g.getNbColumns() && p.getLine()<g.getNbLines())
+        {
+            int indiceMonstre = g.getIndiceElmt(getPos(),'S');
+            int indice = g.indicePos(p);
+
+            if(g.nbElmtsPos(p)==2)
+            {
+                std::vector<int> tabIndices = g.getIndicePos(p);
+                for(int i=0;i<tabIndices.size();i++)
+                {
+                    if(tabIndices[i]!=indiceMonstre)
+                    {
+                        indice =tabIndices[i];
+                    }
+                }
+            }
+
+
+            char t = g.typeOf(indice);
+            auto monster = dynamic_cast<smartMonster*>(g.getElementsTable()[indiceMonstre].get());
+
+
+            if(t=='E') //case vide
+            {
+                monster->changePosition(p);
+            }
+            else if((t=='P' &&g.nbElmtsPos(p)<2 )||( p.getLine()== getPos().getLine() && p.getColumn()==getPos().getColumn()))
+            {
+                int indiceAdv = g.getIndiceAdventurer();
+
+                monster->changePosition(p);
+                auto adv = dynamic_cast<adventurer*>(g.getElementsTable()[indiceAdv].get()) ;
+
+
+                //LE MONSTRE LANCE UNE ATTAQUE
+                monsterAttackManager mnstrAttackManager;
+
+                double force = monster->attack(mnstrAttackManager);
+
+                // L'ADV RECOIT L ATTAQUE
+                adventurerAttackManager advAttackManager;
+                bool mort = adv->receiveAttack(advAttackManager,force);
+
+
+            }
+        }
+    }
+    else{
+
+
+        position p{aleatoirePosition()};
+        int nbElm= g.nbElmtsPos(p);
+
+        if(nbElm<2 && p.getColumn()<g.getNbColumns()&& p.getColumn()>=0 && p.getLine()<g.getNbLines() && p.getLine()>=0)
+        {
+
+            int indice = g.indicePos(p);
+            char t = g.typeOf(indice);
+
+            int indiceMonstre = g.getIndiceElmt(getPos(),'S');
+            auto monster = g.getElementsTable()[indiceMonstre].get();
+
+
+
+            if(t=='E') // CASE VIDE => LE MONSTRE Y VA
+            {
+                monster->changePosition(p);
+            }
+
+        }
+
+    }
+
+
+}
+
+
