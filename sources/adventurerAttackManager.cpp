@@ -47,7 +47,7 @@ bool adventurerAttackManager::receiveAttack(groundElement *elem,double force)
     double pfAbsorbesArmure = 0.75 * force;
     double armorSolidity = adv->getArmor().getSolidity();
 
-    if(armorSolidity > (0.5)*pfAbsorbesArmure)
+    if(armorSolidity > (0.5)*pfAbsorbesArmure) //amure peut abs 3/4 pf
     {
 
         double nouvsol = armorSolidity - (0.5)*pfAbsorbesArmure;
@@ -55,6 +55,21 @@ bool adventurerAttackManager::receiveAttack(groundElement *elem,double force)
         adv->setArmorSolidity(nouvsol);
         reste = 0.25*force;
 
+    }
+    else
+    {
+        adv->setArmorSolidity(0);
+        reste =  force - (2*armorSolidity);
+    }
+
+    if(reste >= adv->lifePoints())
+    {
+        adv->setLifePoints(0);
+        mort = true;
+    }
+    else
+    {   double lp = adv->lifePoints();
+        adv->setLifePoints(lp - reste);
     }
 
     return mort;
