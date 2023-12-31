@@ -15,6 +15,7 @@ class game
      game();
      void clear();
      void rules();
+     std::unique_ptr<viewManager> createView(int choix);
 
 
 
