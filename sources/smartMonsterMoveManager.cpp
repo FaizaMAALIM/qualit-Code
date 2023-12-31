@@ -108,3 +108,132 @@ int smartMonsterMoveManager::choixDirection(int d1,int d2,const ground &g)
 
     return direction;
 }
+
+position smartMonsterMoveManager::possiblePosition(ground&g)
+{
+    //ON CHERCHE DANS QUELLE DIRECTION LE MONSTRE DOIT ALLER PR ALLER VERS AVENTURIER
+
+    int lineAdv = g.getAdventurerPosition().getLine();
+    int colAdv = g.getAdventurerPosition().getColumn();
+    int lineMonster = getPos().getLine();
+    int colMonster = getPos().getColumn();
+    position pos{};
+
+    /*
+      2
+    4 $ 6
+      8
+    */
+
+    //Le monstre est sur l'adv
+    if(lineAdv==lineMonster && colMonster==colAdv)
+    {
+        pos ={getPos().getLine(),getPos().getColumn()};
+        return pos;
+    }
+
+
+    if(lineMonster>lineAdv) // LE MONSTRE EST AU DESSUS DE LAVENTURIER
+    {
+        if(colMonster<colAdv)  //AU DESSUS A GAUCHE : aller en 2 ou 6
+        {
+           int direction = choixDirection(2,6,g);
+           pos = directionPosition(direction);
+        }
+        else if(colMonster>colAdv)  //AU DESSUS A DROITE : aller en 4 ou 2
+        {
+           int direction = choixDirection(4,2,g);
+           pos = directionPosition(direction);
+
+        }
+        else{ // AU DESSUS SUR LA MEME COLONNE 1 DIRECTIONS POSSIBLE : 2
+            position ps = directionPosition(2);
+            if(g.nbElmtsPos(ps)<2) //pas de bataille en cours sur la case
+            {
+                pos = ps;
+            }
+            else{
+                pos={-1,-1};
+            }
+
+        }
+    }
+    else if(lineMonster<lineAdv) // LE MONSTRE EST EN DESSOUS DE LAVENTURIER
+    {
+        if(colMonster<colAdv) // EN DESSOUS A GAUCHE: aller en 8 ou 6
+        {
+            int direction = choixDirection(8,6,g);
+            pos = directionPosition(direction);
+        }
+        else if(colMonster>colAdv) // EN DESSOUS A DROITE: 8 ou 4
+        {
+           int direction = choixDirection(8,4,g);
+           pos = directionPosition(direction);
+
+        }
+        else{ // EN DESSOUS SUR LA MEME COLONNE 1 DIRECTION POSSIBLE : 8
+
+            position ps = directionPosition(8);
+            if(g.nbElmtsPos(ps)<2) //pas de bataille en cours sur la case
+            {
+                pos = ps;
+            }
+            else{
+                pos={-1,-1};
+            }
+        }
+    }
+    else if (lineMonster==lineAdv) // LE MONSTRE EST SUR LA MEME LIGNE
+    {
+        if(colMonster<colAdv){ // A GAUCHE : 1 DIRECTION POSSIBLE : 6
+            position ps = directionPosition(6);
+            if(g.nbElmtsPos(ps)<2) //pas de bataille en cours sur la case
+            {
+                pos = ps;
+            }
+            else{
+                pos={-1,-1};
+            }
+        }
+        else{ // A DROITE : 1 DIRECTION POSSIBLE : 4
+
+            position ps = directionPosition(4);
+            if(g.nbElmtsPos(ps)<2) //pas de bataille en cours sur la case
+            {
+                pos = ps;
+            }
+            else{
+                pos={-1,-1};
+            }
+        }
+    }
+    else if(colMonster==colAdv) // LE MONSTRE EST SUR LA MEME COLONNE
+    {
+        if(lineMonster>lineAdv){ // AU DESSUS 1 DIRECTION POSSIBLE : 2
+
+            position ps = directionPosition(2);
+            if(g.nbElmtsPos(ps)<2) //pas de bataille en cours sur la case
+            {
+                pos = ps;
+            }
+            else{
+                pos={-1,-1};
+            }
+        }
+        else{ // EN DESSOUS: 1 DIRECTION POSSIBLE : 8
+
+            position ps = directionPosition(8);
+            if(g.nbElmtsPos(ps)<2) //pas de bataille en cours sur la case
+            {
+                pos = ps;
+            }
+            else{
+                pos={-1,-1};
+            }
+        }
+    }
+
+    return pos;
+}
+
+

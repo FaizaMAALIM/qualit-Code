@@ -12,9 +12,11 @@ class smartMonsterMoveManager : public movementManager
         position directionPosition(int direction) override;
 
         bool isNearAdventurer(ground &g) const;
-        position aleatoirePosition();
+            position aleatoirePosition();
 
 
+        int choixDirection(int d1,int d2,const ground &g) ;
+        position possiblePosition(ground &g) ;
 
 
 };
