@@ -7,6 +7,8 @@ class monsterAttackManager : public attackManager
 {
     public:
       monsterAttackManager();
+      double attack(groundElement *elem) override;
+
 
 
 
