@@ -36,6 +36,11 @@ void game::gererErreurSaisie()
     }
 }
 
+void game::startDisplay()
+{
+    std::cout<<" +-+-+-+-+-+-+-+-+-+-+ BIENVENUE DANS DUNGEON II +-+-+-+-+-+-+-+-+-+-+\n\n";
+    std::cout<<" Ressortez en vie du donjon avec l'amulette  ! \n\n";
+}
 
 void game::rules()
 {

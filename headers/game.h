@@ -17,6 +17,8 @@ class game
      void rules();
      std::unique_ptr<viewManager> createView(int choix);
      void gererErreurSaisie();
+     void startDisplay();
+
 
 
 
