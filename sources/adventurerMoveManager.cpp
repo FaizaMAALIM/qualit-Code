@@ -137,7 +137,21 @@ void adventurerMoveManager::move(ground&g,int direction)
             }
 
         }
+        else if(type=='M') //tas de pièces
+        {
+            int indiceMoney = g.getIndiceElmt(nouvPos,type);
+            auto moneyPtr =  dynamic_cast<money*>(g.getElementsTable()[indiceMoney].get());
 
+            int val = moneyPtr->getValue();
+
+           g.removeElement(indice);
+           adv->changePosition(nouvPos);
+           adv->addToBourse(val);
+
+        }
 
     }
+
+
+}
 
