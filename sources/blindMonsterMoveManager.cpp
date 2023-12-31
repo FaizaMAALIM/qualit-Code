@@ -68,3 +68,24 @@ int blindMonsterMoveManager::directionAleatoire() const
 
     return direction;
 }
+
+position blindMonsterMoveManager::possiblePosition(ground &g)
+{
+    /* SE DEPLACE ALEATOIREMENT DANS UNE DES 9 DIRECTIONS
+    1 2 3
+    4 * 6
+    7 8 9
+    */
+   position posAdv = g.getAdventurerPosition();
+
+    if((posAdv.getLine()== getPos().getLine() && posAdv.getColumn()==getPos().getColumn()))
+    {
+        position pos{getPos()};
+        return pos;
+    }
+
+    int direction  = directionAleatoire();
+
+    return directionPosition(direction);
+
+}
