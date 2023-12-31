@@ -9,6 +9,12 @@ class attackManager
     public:
     virtual ~attackManager() = default;
 
+     public:
+    virtual ~attackManager() = default;
+    virtual double attack(groundElement *elem) =0;
+    virtual bool receiveAttack(groundElement *elem,double force)=0;
+
+    double pickRandom() const;
 
 };
 
