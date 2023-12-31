@@ -89,3 +89,52 @@ position blindMonsterMoveManager::possiblePosition(ground &g)
     return directionPosition(direction);
 
 }
+
+void blindMonsterMoveManager::move(ground &g, int direction)
+{
+    position nouvPos{possiblePosition(g)};
+
+
+    if((nouvPos.getColumn()<g.getNbColumns() && nouvPos.getColumn()>=0 && nouvPos.getLine()<g.getNbLines()&& nouvPos.getLine()>=0))
+    {
+        position anciennePos{getPos()};
+        int indice = g.getIndiceElmt(anciennePos,'B');
+
+        auto monster = dynamic_cast<blindMonster*>(g.getElementsTable()[indice].get());
+        int indiceNouv = g.indicePos(nouvPos);
+
+        if(g.nbElmtsPos(nouvPos)==2)
+        {
+            std::vector<int> tabIndices = g.getIndicePos(nouvPos);
+            for(int i=0;i<tabIndices.size();i++)
+            {
+                if(tabIndices[i]!=indice)
+                {
+                    indiceNouv =tabIndices[i];
+                }
+            }
+        }
+
+        char t=g.typeOf(indiceNouv);
+
+        if(t=='E')
+        {
+            monster->changePosition(nouvPos);
+        }
+        else if((t=='P' && g.nbElmtsPos(nouvPos)<2 )||(nouvPos.getLine()== getPos().getLine() && nouvPos.getColumn()==getPos().getColumn()))
+        {
+            monster->changePosition(nouvPos);
+
+            int indiceAdv = g.getIndiceAdventurer();
+            auto adv = dynamic_cast<adventurer*>(g.getElementsTable()[indiceAdv].get()) ;
+
+            monsterAttackManager mnstrAttackManager;
+            double force = monster->attack(mnstrAttackManager);
+
+            adventurerAttackManager advAttackManager;
+            bool mort = adv->receiveAttack(advAttackManager,force);
+        }
+
+ }
+
+}
