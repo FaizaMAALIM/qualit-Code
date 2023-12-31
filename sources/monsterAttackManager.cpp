@@ -17,3 +17,18 @@ double monsterAttackManager::attack(groundElement *elem)
     }
     return force;
 }
+
+bool monsterAttackManager::receiveAttack(groundElement *elem,double force)
+{
+    auto mnstr=dynamic_cast<monster*>(elem);
+    double pvmonstre = mnstr->lifePoints();
+
+    if(force > pvmonstre)
+    {
+        return true;
+    }
+    else{
+        mnstr->setLifePoints(pvmonstre - force);
+        return false;
+    }
+}
