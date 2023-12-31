@@ -1,4 +1,3 @@
- 
 #ifndef TESTADVENTURERMOVEMANAGER_H
 #define TESTADVENTURERMOVEMANAGER_H
 
@@ -7,6 +6,17 @@
 #include "adventurerMoveManager.h"
 #include "ground.h"
 
+#include "groundElement.h"
+#include "character.h"
+#include "monster.h"
+#include "smartMonster.h"
+#include "blindMonster.h"
+#include "adventurer.h"
+#include "wall.h"
+#include "amulet.h"
+#include "outside.h"
+#include "door.h"
+#include "money.h"
 
 TEST_CASE("Test de la classe adventurer move manager")
 {
@@ -77,7 +87,6 @@ TEST_CASE("Test de la classe adventurer move manager")
         }
 
     }
-
     SUBCASE("Test du déplacement de l'aventurier")
     {
         //construction d'un terrain 3x3
@@ -226,5 +235,33 @@ TEST_CASE("Test de la classe adventurer move manager")
             REQUIRE_EQ(posAttendue,nouvPosAdv);
 
         }
+        SUBCASE("Test aller sur un tas de pièce") //doit aller en 0,2
+        {
+            int direction = 3;
+            position anciennePosAdv = g.getAdventurerPosition();
+            position posAttendue{0,2};
+            adventurerMoveManager advMv{anciennePosAdv};
+            advMv.move(g,direction);
+            position nouvPosAdv = g.getAdventurerPosition();
+
+            REQUIRE_EQ(posAttendue,nouvPosAdv);
+
+            //vérifier que le montant a été récupéré
+            int indiceAdv{g.getIndiceAdventurer()};
+            auto adv=dynamic_cast<adventurer*>(g.getElementsTable()[indiceAdv].get());
+            int montantBourse = adv->getBourse();
+
+            REQUIRE_EQ(montantBourse,10);
+        }
+
+
+
+
     }
+
+
+
 }
+
+
+#endif
