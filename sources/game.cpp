@@ -48,6 +48,23 @@ void game::rules()
     std::cout<<"\n Vous devez récupérer l'amulette et réussir à atteindre la sortie en vie. \n Vous croiserez des monstres sur votre chemin que vous devrez combattre avec \n votre épée. Vous trouverez des tas de pièces qui vous permettront de réparer \n votre équipement. Vous pouvez vous déplacer dans les 9 directions ou rester \n à votre place. \n Les smart monster se dirigeront vers vous tandis que les blind monster se\n déplacent au hasard. \n\n NB:\n -Vous ne pouvez pas vous déplacer dans un mur ni dans une case extérieure,\n et vous ne pouvez pas sortir sans l'amulette.\n -Lors d'une bataille, vous pouvez continuer à vous battre en restant à la \n meme case ou fuir. \n\n A vous de jouer !\n\n";
 }
 
+
+int game::choixView()
+{
+   int choix;
+   do
+   {
+    std::cout<<" Quel type d'interface voulez vous ?\n 1- Affichage texte\n 2- Affichage coloré\n\n > ";
+    std::cin>>choix;
+
+    gererErreurSaisie();
+
+   } while (!std::cin.good() ||!(choix==1 || choix==2));
+
+
+    return choix;
+}
+
 std::unique_ptr<viewManager> game::createView(int choix)
 {
 
@@ -66,3 +83,4 @@ std::unique_ptr<viewManager> game::createView(int choix)
         return 0;
     }
 }
+
