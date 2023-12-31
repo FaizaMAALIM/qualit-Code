@@ -38,3 +38,24 @@ double adventurerAttackManager::attack(groundElement *elem)
 
     return force;
 }
+
+bool adventurerAttackManager::receiveAttack(groundElement *elem,double force)
+{
+    auto adv=dynamic_cast<adventurer*>(elem);
+    double reste;
+    bool mort = false;
+    double pfAbsorbesArmure = 0.75 * force;
+    double armorSolidity = adv->getArmor().getSolidity();
+
+    if(armorSolidity > (0.5)*pfAbsorbesArmure)
+    {
+
+        double nouvsol = armorSolidity - (0.5)*pfAbsorbesArmure;
+
+        adv->setArmorSolidity(nouvsol);
+        reste = 0.25*force;
+
+    }
+
+    return mort;
+}
