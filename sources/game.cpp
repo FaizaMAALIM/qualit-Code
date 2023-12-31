@@ -25,6 +25,18 @@ void game::clear()
     system("clear || cls");
 }
 
+
+void game::gererErreurSaisie()
+{
+    if (!std::cin.good())
+    {
+        std::cout << "\n Veuillez entrer un caractère valide\n\n";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+}
+
+
 void game::rules()
 {
     std::cout<<"\n +-+-+-+-+-+-+-+-+-+-+-+-+-+ REGLES DU JEU +-+-+-+-+-+-+-+-+-+-+-+-+-+\n\n";
