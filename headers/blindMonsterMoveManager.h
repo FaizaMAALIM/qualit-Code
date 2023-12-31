@@ -9,5 +9,6 @@ class blindMonsterMoveManager : public movementManager
     public:
         blindMonsterMoveManager(const position &p);
         position directionPosition(int direction) override;
+        int directionAleatoire() const;
 
 }

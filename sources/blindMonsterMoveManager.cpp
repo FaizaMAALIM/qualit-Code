@@ -55,3 +55,16 @@ position blindMonsterMoveManager::directionPosition(int direction)
 
     return p;
 }
+
+
+int blindMonsterMoveManager::directionAleatoire() const
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::vector<int> directionsTab = {1, 2, 3, 4, 6, 7, 8, 9};
+    std::uniform_int_distribution<> distrib(0, directionsTab.size() - 1);
+    int i = distrib(gen);
+    int direction= directionsTab[i];
+
+    return direction;
+}
