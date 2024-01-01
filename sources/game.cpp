@@ -178,7 +178,6 @@ void game::play()
     bool partie = true;
     bool win = false;
     int direction;
-    int tour=1;
     clear() ;
 
     startDisplay();
@@ -199,6 +198,75 @@ void game::play()
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //vider le tampn
     std::cin.get();
     clear() ;
+
+    while( partie && !win )
+    {
+
+        std::vector<std::vector<int>> tabInfosMonster;
+
+        std::vector<monster*> tabMonstres;
+
+        std::cout<<" +----------------------------------- Tour n°"<<tour<<" -----------------------------------+\n\n";
+
+
+
+        g.display(v);
+        int indiceAdv = g.getIndiceAdventurer();
+        auto adv= dynamic_cast<adventurer*>(g.getElementsTable()[indiceAdv].get());
+
+        int rep;
+        int depl=0;
+
+        do{
+            std::cout<<"\n\n Entrer la direction où vous souhaitez aller: \n";
+            std::cin >>direction;
+        }
+        while(!std::cin.good() ||!(direction==1 || direction==2 || direction==3 || direction==4||direction==5||direction==6||direction==7 ||direction==8 ||direction==9));
+
+        position posAdv = g.getAdventurerPosition();
+        adventurerMoveManager advMover{posAdv};
+        advMover.move(g,direction);
+
+
+
+        if(!win)
+        {
+            std::cout<<" +----------------------------------- Tour n°"<<tour<<" -----------------------------------+\n\n";
+            g.display(v);
+        }
+        else
+        {
+            g.display(v);
+            std::cout<< "Vous avez gagné ! \n";
+            break;
+        }
+
+
+
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //vider le tampn
+        std::cin.get();
+        clear() ;
+        //LES MONSTRES SE DEPLACENT
+
+
+        std::cout<<" +----------------------------------- Tour n°"<<tour<<" -----------------------------------+\n\n";
+
+
+        g.display(v);
+
+        if(adv->lifePoints()>0)
+        {
+                std::cout<<"\n +------------------------------ Fin du tour n°"<<tour<<" ---------------------------------+\n\n";
+                tour++;
+        }
+        else
+        {
+            std::cout<<"Vous êtes mort ! Fin de la partie ... \n";
+            partie= false;
+        }
+
+    }
+
 
 
 
