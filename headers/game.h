@@ -22,6 +22,8 @@ class game
      void chargerGround(ground &g);
      void useBourse(adventurer *adv);
      void play();
+     std::vector<monster*> deplacerMonstres(ground&g);
+
 
 
 

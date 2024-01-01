@@ -84,6 +84,49 @@ std::unique_ptr<viewManager> game::createView(int choix)
     }
 }
 
+std::vector<monster*> game::deplacerMonstres(ground&g)
+{
+    std::vector<monster*> tabMonstres;
+
+    for(int i=0;i<g.getElementsTable().size();i++)
+    {
+
+        if(g.typeOf(i)=='S') //SMART MONSTER
+        {
+            auto monster = dynamic_cast<smartMonster*>(g.getElementsTable()[i].get());
+            position posMonster = monster->getPosition();
+            smartMonsterMoveManager monsterMover{posMonster};
+            monsterMover.move(g);
+
+            if(monster->isAtOneCaseAdv(g))
+            {
+                tabMonstres.push_back(monster);
+            }
+
+        }
+        else if(g.typeOf(i)=='B') //MONSTRE AVEUGLE
+        {
+            auto monster = dynamic_cast<blindMonster*>(g.getElementsTable()[i].get());
+            position posMonster =monster->getPosition();
+            blindMonsterMoveManager monsterMover{posMonster};
+            monsterMover.move(g);
+
+            if(monster->isAtOneCaseAdv(g))
+            {
+                tabMonstres.push_back(monster);
+            }
+        }
+
+    }
+    return tabMonstres;
+
+}
+
+
+
+
+
+
 void game::chargerGround(ground &g)
 {
     int choix;
@@ -256,37 +299,9 @@ void game::play()
     clear() ;
 
     //LES MONSTRES SE DEPLACENT
-    for(int i=0;i<g.getElementsTable().size();i++)
-    {
 
-        if(g.typeOf(i)=='S') //SMART MONSTER
-        {
-            auto monster = dynamic_cast<smartMonster*>(g.getElementsTable()[i].get());
-            position posMonster = monster->getPosition();
-            smartMonsterMoveManager monsterMover{posMonster};
-            monsterMover.move(g);
 
-            if(monster->isAtOneCaseAdv(g))
-            {
-                tabMonstres.push_back(monster);
-            }
-
-        }
-        else if(g.typeOf(i)=='B') //MONSTRE AVEUGLE
-        {
-            auto monster = dynamic_cast<blindMonster*>(g.getElementsTable()[i].get());
-            position posMonster =monster->getPosition();
-            blindMonsterMoveManager monsterMover{posMonster};
-            monsterMover.move(g);
-
-            if(monster->isAtOneCaseAdv(g))
-            {
-                tabMonstres.push_back(monster);
-            }
-        }
-
-    }
-
+    tabMonstres = deplacerMonstres(g);
 
 
 
