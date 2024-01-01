@@ -298,13 +298,13 @@ void game::play()
 
     if(adv->lifePoints()>0)
     {
-            std::cout<<"\n +------------------------------ Fin du tour n°"<<tour<<" ---------------------------------+\n\n";
+        std::cout<<"\n +------------------------------ Fin du tour n°"<<tour<<" ---------------------------------+\n\n";
 
         std::cout<<"\n Infos des monstres proches  : \n";
 
-    std::cout<<" +--------------------------------------------------------------------------------+\n";
-    std::cout<<" | Ligne  |  Colonne   |       Type       |    PV       |     PF       | Hability |\n";
-    std::cout<<" +--------------------------------------------------------------------------------+\n";
+        std::cout<<" +--------------------------------------------------------------------------------+\n";
+        std::cout<<" | Ligne  |  Colonne   |       Type       |    PV       |     PF       | Hability |\n";
+        std::cout<<" +--------------------------------------------------------------------------------+\n";
 
 
     for(int i=0;i<tabMonstres.size();i++)
@@ -328,6 +328,24 @@ void game::play()
 
 
     }
+
+        std::cout<<"\n Infos de l'aventurier  : \n";
+
+        std::cout<<" +--------------------------------------------------------------------------------+\n";
+        std::cout<<" |    PV   |  Points épée   |    Points armure     |     Bourse      |    Amulet  |\n";
+        std::cout<<" +--------------------------------------------------------------------------------+\n";
+
+        std::cout<<" | ";
+        std::cout<< adv->lifePoints() <<"        ";
+        std::cout<<adv->getSword().getSolidity()<<"                 ";
+        std::cout<<adv->getArmor().getSolidity()<<"                     ";
+        std::cout<<adv->getBourse()<<"         ";
+        adv->hasAmulet()?std::cout<<"        Oui    ":std::cout<<"        Non    ";
+        std::cout<<" \n +--------------------------------------------------------------------------------+\n";
+
+        std::cout<<"\n";
+
+
     std::cout<<" +--------------------------------------------------------------------------------+\n";
 
         std::cout<<" Appuyez sur entrée pour continuer ...";
