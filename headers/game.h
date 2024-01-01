@@ -20,6 +20,8 @@ class game
      void startDisplay();
      int choixView();
      void chargerGround(ground &g);
+     void useBourse(adventurer *adv);
+
 
 
 

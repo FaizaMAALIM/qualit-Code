@@ -130,3 +130,39 @@ void game::chargerGround(ground &g)
 
 }
 
+void game::useBourse(adventurer *adv)
+{
+    int montantVoulu;
+    int montantBourse = adv->getBourse();
+    int choixRep;
+    do
+    {
+        std::cout<<" Vous avez "<<montantBourse<<" pieces.\n Entrer le montant que vous voulez utiliser : ";
+        std::cin>>montantVoulu;
+
+        gererErreurSaisie();
+
+    }while(!std::cin.good() || montantVoulu<=0 || montantVoulu>montantBourse);
+
+    do
+    {
+        std::cout<<"\n Que voulez vous réparer ? \n 1) Armure \n 2) Epee \n\n > ";
+        std::cin>>choixRep;
+
+
+    } while (!std::cin.good() || !(choixRep==1 || choixRep==2));
+
+    if(choixRep==1) //Réparer armure
+    {
+        adv->addToArmorSolidity(montantVoulu);
+        adv->removeFromBourse(montantVoulu);
+        std::cout<<" Votre armure a maintenant "<<adv->getArmor().getSolidity()<<" points.\n";
+    }
+    else if(choixRep==2) //Réparer épée
+    {
+        adv->addToSwordSolidity(montantVoulu);
+        adv->removeFromBourse(montantVoulu);
+        std::cout<<" Votre épee a maintenant "<<adv->getSword().getSolidity()<<" points.\n";
+    }
+
+}
