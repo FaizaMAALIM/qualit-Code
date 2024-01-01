@@ -19,6 +19,8 @@ class game
      void gererErreurSaisie();
      void startDisplay();
      int choixView();
+     void chargerGround(ground &g);
+
 
 
 

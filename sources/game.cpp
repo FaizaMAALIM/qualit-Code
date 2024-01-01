@@ -84,3 +84,49 @@ std::unique_ptr<viewManager> game::createView(int choix)
     }
 }
 
+void game::chargerGround(ground &g)
+{
+    int choix;
+    std::string nomFic;
+    do
+    {
+        std::cout<<" Comment voulez-vous construire le terrain ? \n 1- Construire manuellement\n 2- Importer depuis un fichier\n\n > ";
+        std::cin>>choix;
+
+        gererErreurSaisie();
+    }
+    while(!std::cin.good() ||   !(choix==1||choix==2));
+
+    switch (choix)
+    {
+    case 1:
+        g.buildGround();
+
+        char rep;
+        do{
+            std::cout<<" Voulez vous sauvegarder le terrain dans un fichier ? O/N :";
+            std::cin>>rep;
+
+            gererErreurSaisie();
+
+        }while(!std::cin.good() || !(rep=='O'||rep=='N'));
+        if(rep=='O')
+        {
+            g.exportGround();
+            std::cout<<" \n Fichier sauvegardé avec succès \n";
+        }
+        break;
+
+    case 2:
+    std::ifstream fic;
+        do{
+            std::cout<<" Entrer le nom du fichier : "; std::cin>>nomFic;
+            fic.open(nomFic.c_str());
+        } while (!fic.is_open());
+        g.importGround(fic);
+        break;
+    }
+
+
+}
+
