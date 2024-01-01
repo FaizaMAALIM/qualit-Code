@@ -25,6 +25,7 @@ class game
      std::vector<monster*> deplacerMonstres(ground&g);
 
      void afficherInfosAdv(const adventurer*adv);
+     void afficherInfosMonstresProches(const std::vector<monster*> &tabMonstres) ;
 
 
 

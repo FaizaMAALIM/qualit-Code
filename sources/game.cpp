@@ -142,6 +142,39 @@ void game::afficherInfosAdv(const adventurer*adv)
 
 }
 
+void game::afficherInfosMonstresProches(const std::vector<monster*> &tabMonstres)
+{
+    std::cout<<"\n Infos des monstres proches  : \n";
+
+    std::cout<<" +--------------------------------------------------------------------------------+\n";
+    std::cout<<" | Ligne  |  Colonne   |       Type       |    PV       |     PF       | Hability |\n";
+    std::cout<<" +--------------------------------------------------------------------------------+\n";
+
+
+    for(int i=0;i<tabMonstres.size();i++)
+    {
+        std::cout<<" |    ";
+        std::cout<<tabMonstres[i]->getPosition().getLine()<<"         ";
+        std::cout<<tabMonstres[i]->getPosition().getColumn()<<"          ";
+
+
+        if(dynamic_cast<blindMonster*>(tabMonstres[i]))
+        {
+            std::cout<<"Blind Monster"<<"      ";
+        }
+        else if(dynamic_cast<smartMonster*>(tabMonstres[i]))
+        {
+            std::cout<<"Smart Monster"<<"      ";
+        }
+        std::cout<<tabMonstres[i]->lifePoints()<<"            ";
+        std::cout<<tabMonstres[i]->forcePoints()<<"           ";
+        std::cout<<tabMonstres[i]->getHability()<<"   \n";
+
+
+    }
+    std::cout<<" +--------------------------------------------------------------------------------+\n";
+}
+
 
 
 
@@ -333,34 +366,8 @@ void game::play()
     {
         std::cout<<"\n +------------------------------ Fin du tour n°"<<tour<<" ---------------------------------+\n\n";
 
-        std::cout<<"\n Infos des monstres proches  : \n";
 
-        std::cout<<" +--------------------------------------------------------------------------------+\n";
-        std::cout<<" | Ligne  |  Colonne   |       Type       |    PV       |     PF       | Hability |\n";
-        std::cout<<" +--------------------------------------------------------------------------------+\n";
-
-
-    for(int i=0;i<tabMonstres.size();i++)
-    {
-        std::cout<<" |    ";
-        std::cout<<tabMonstres[i]->getPosition().getLine()<<"         ";
-        std::cout<<tabMonstres[i]->getPosition().getColumn()<<"          ";
-
-
-        if(dynamic_cast<blindMonster*>(tabMonstres[i]))
-        {
-            std::cout<<"Blind Monster"<<"      ";
-        }
-        else if(dynamic_cast<smartMonster*>(tabMonstres[i]))
-        {
-            std::cout<<"Smart Monster"<<"      ";
-        }
-        std::cout<<tabMonstres[i]->lifePoints()<<"            ";
-        std::cout<<tabMonstres[i]->forcePoints()<<"           ";
-        std::cout<<tabMonstres[i]->getHability()<<"   \n";
-
-
-    }
+    afficherInfosMonstresProches(tabMonstres);
 
     afficherInfosAdv(adv);
 
