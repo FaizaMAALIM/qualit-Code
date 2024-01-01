@@ -167,3 +167,65 @@ void game::useBourse(adventurer *adv)
     }
 
 }
+
+
+
+
+
+
+void game::play()
+{
+    bool partie = true;
+    bool win = false;
+    int direction;
+    int tour=1;
+    clear() ;
+
+    startDisplay();
+
+
+    int choixInterface = choixView();
+    clear() ;
+    auto v = move(createView(choixInterface));
+
+
+    startDisplay();
+
+    ground g;
+    chargerGround(g);
+    clear() ;
+    rules();
+    std::cout<<" Appuyez sur entrée pour continuer ...";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //vider le tampn
+    std::cin.get();
+    clear() ;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
