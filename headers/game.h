@@ -24,6 +24,7 @@ class game
      void play();
      std::vector<monster*> deplacerMonstres(ground&g);
 
+     void afficherInfosAdv(const adventurer*adv);
 
 
 

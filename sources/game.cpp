@@ -122,7 +122,25 @@ std::vector<monster*> game::deplacerMonstres(ground&g)
 
 }
 
+void game::afficherInfosAdv(const adventurer*adv)
+{
+    std::cout<<"\n Infos de l'aventurier  : \n";
 
+    std::cout<<" +--------------------------------------------------------------------------------+\n";
+    std::cout<<" |    PV   |  Points épée   |    Points armure     |     Bourse      |    Amulet  |\n";
+    std::cout<<" +--------------------------------------------------------------------------------+\n";
+
+    std::cout<<" | ";
+    std::cout<< adv->lifePoints() <<"        ";
+    std::cout<<adv->getSword().getSolidity()<<"                 ";
+    std::cout<<adv->getArmor().getSolidity()<<"                     ";
+    std::cout<<adv->getBourse()<<"         ";
+    adv->hasAmulet()?std::cout<<"        Oui    ":std::cout<<"        Non    ";
+    std::cout<<" \n +--------------------------------------------------------------------------------+\n";
+
+    std::cout<<"\n";
+
+}
 
 
 
@@ -344,21 +362,8 @@ void game::play()
 
     }
 
-        std::cout<<"\n Infos de l'aventurier  : \n";
+    afficherInfosAdv(adv);
 
-        std::cout<<" +--------------------------------------------------------------------------------+\n";
-        std::cout<<" |    PV   |  Points épée   |    Points armure     |     Bourse      |    Amulet  |\n";
-        std::cout<<" +--------------------------------------------------------------------------------+\n";
-
-        std::cout<<" | ";
-        std::cout<< adv->lifePoints() <<"        ";
-        std::cout<<adv->getSword().getSolidity()<<"                 ";
-        std::cout<<adv->getArmor().getSolidity()<<"                     ";
-        std::cout<<adv->getBourse()<<"         ";
-        adv->hasAmulet()?std::cout<<"        Oui    ":std::cout<<"        Non    ";
-        std::cout<<" \n +--------------------------------------------------------------------------------+\n";
-
-        std::cout<<"\n";
 
 
     std::cout<<" +--------------------------------------------------------------------------------+\n";
