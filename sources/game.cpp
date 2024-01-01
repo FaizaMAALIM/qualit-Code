@@ -149,6 +149,7 @@ void game::useBourse(adventurer *adv)
         std::cout<<"\n Que voulez vous réparer ? \n 1) Armure \n 2) Epee \n\n > ";
         std::cin>>choixRep;
 
+        gererErreurSaisie();
 
     } while (!std::cin.good() || !(choixRep==1 || choixRep==2));
 
