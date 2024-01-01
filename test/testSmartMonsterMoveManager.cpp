@@ -62,7 +62,6 @@ TEST_CASE("Test de la classe smart monster move manager")
         }
 
     }
-
     SUBCASE("Test de la méthode vérifiant si le monstre est proche de l'aventurier")
     {
         SUBCASE("Test aventurier proche")
@@ -117,3 +116,6 @@ TEST_CASE("Test de la classe smart monster move manager")
 
     }
 }
+
+
+#endif

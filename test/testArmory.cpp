@@ -10,12 +10,12 @@ TEST_CASE("Test de la classe armory")
 
     SUBCASE("Test constructeur")
     {
-        int sol = 10;
+        double sol = 10.0;
         armory a{sol};
 
         REQUIRE_EQ(a.getSolidity(),sol);
     }
-    
+
 }
 
 

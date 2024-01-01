@@ -5,7 +5,10 @@ groundElement::groundElement(const position& pos):d_position{pos}{}
 
 void groundElement::changePosition(const position &pos)
 {
-    d_position=pos;    
+
+     d_position.setPosition(pos.getLine(),pos.getColumn());
+
+
 }
 
 position groundElement::getPosition() const

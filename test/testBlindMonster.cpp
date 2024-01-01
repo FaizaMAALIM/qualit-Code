@@ -17,7 +17,7 @@ TEST_CASE("Test de la classe smart monster")
         REQUIRE_EQ(b.getPosition().getColumn(),1);
 
     }
-    
+
 }
 
 

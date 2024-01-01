@@ -13,25 +13,21 @@ class game
 {
     public:
      game();
-     void clear();
-     void rules();
-     std::unique_ptr<viewManager> createView(int choix);
-     void gererErreurSaisie();
-     void startDisplay();
-     int choixView();
-     void chargerGround(ground &g);
-     void useBourse(adventurer *adv);
      void play();
-     std::vector<monster*> deplacerMonstres(ground&g);
+     void clear();
+
+     void chargerGround(ground &g);
+     int choixView();
+     std::unique_ptr<viewManager> createView(int choix);
+
+     void useBourse(adventurer *adv);
 
      void afficherInfosAdv(const adventurer*adv);
      void afficherInfosMonstresProches(const std::vector<monster*> &tabMonstres) ;
-
-
-
-
-
-
+     std::vector<monster*> deplacerMonstres(ground&g);
+     void startDisplay();
+     void rules();
+     void gererErreurSaisie();
 };
 
 

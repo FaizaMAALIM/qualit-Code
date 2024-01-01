@@ -5,6 +5,8 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
+
+
 #include "groundElement.h"
 #include "istream"
 #include <iostream>
@@ -29,44 +31,46 @@ using std::string;
 class ground
 {
     public:
-        ground(); 
-        ground(int nbl,int nbc); 
+
+        //CONSTRUCTEURS
+        ground();
+        ground(int nbl,int nbc);
+
+        //GESTION TERRAIN
         void buildGround();
         void importGround(std::istream &ist);
         void exportGround();
+        void setSize(int length,int width);
+        void display(std::unique_ptr<viewManager> &view);
 
 
-        char typeOf(int indice) const; 
-        std::vector<int> getIndicePos(const position &p) const;  //test ok
+        //GESTION ELEMENTS TERRAIN
+        void addElementToGround(std::unique_ptr<groundElement> element);
+        void removeElement(int indice);
+        const std::vector<std::unique_ptr<groundElement>> & getElementsTable() const;
+        std::vector<int> getIndicePos(const position &p) const;
+        int indicePos(const position &p) const;
+        int nbElmtsPos(const position &p) const;
+        int getIndiceElmt(const position &p,char type) const;
+        position getAdventurerPosition() const;
+        char typeOf(int indice) const;
         position posOf(int indice) const;
 
-
-        position getAdventurerPosition() const; //position de laventurier 
+        //GETTERS
         int getIndiceAdventurer() const;
-
-        void display(std::unique_ptr<viewManager> &view);
-        int indicePos(const position &p) const; 
-
-        int nbElmtsPos(const position &p) const;
-        int getIndiceElmt(const position &p,char type) const; 
-       
-        int getNbColumns() const; 
-        int getNbLines() const;   
+        int getNbColumns() const;
+        int getNbLines() const;
         int getNbTotalElmts() const;
-        const std::vector<std::unique_ptr<groundElement>> & getElementsTable() const;
- 
 
-        void addElementToGround(std::unique_ptr<groundElement> element); 
-        void removeElement(int indice); 
-        
-        //test ok
-        void setSize(int length,int width);  
+        //ALEATOIRES
+        int aleatNumber(int n1,int n2);
+        double aleatDouble() const;
 
     private:
-        int d_nbLines; 
-        int d_nbColumns; 
 
-      std::vector<std::unique_ptr<groundElement>> d_groundElementsTab;
+        int d_nbLines;
+        int d_nbColumns;
+        std::vector<std::unique_ptr<groundElement>> d_groundElementsTab;
 
 };
 

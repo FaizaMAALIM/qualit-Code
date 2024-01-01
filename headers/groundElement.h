@@ -3,8 +3,6 @@
 #include "position.h"
 class viewManager;
 
-//CLASSE REPRESENTANT UN ELEMENT DU TERRAIN
-
 
 class groundElement
 {

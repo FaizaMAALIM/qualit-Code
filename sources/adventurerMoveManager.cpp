@@ -1,4 +1,8 @@
- #include "adventurer.h"
+#include "adventurerMoveManager.h"
+#include "adventurerAttackManager.h"
+#include "monsterAttackManager.h"
+#include "ground.h"
+#include "adventurer.h"
 #include "monster.h"
 #include "money.h"
 #include <iostream>
@@ -8,10 +12,7 @@
 
 adventurerMoveManager::adventurerMoveManager(const position&pos):movementManager{pos}{}
 
-position directionPosition(int direction) override;
 
-
-//nouvelle position après deplacement
 position adventurerMoveManager::directionPosition(int direction)
 {
     position p{};
@@ -62,8 +63,6 @@ position adventurerMoveManager::directionPosition(int direction)
 }
 
 
-
-
 void adventurerMoveManager::move(ground&g,int direction)
 {
     position nouvPos{directionPosition(direction)};
@@ -79,7 +78,6 @@ void adventurerMoveManager::move(ground&g,int direction)
 
         type=g.typeOf(indice);
 
-        //SI il ya 2 elmts : forcément l'adv + le monstre
         if(g.nbElmtsPos(nouvPos)==2)
         {
            std::vector<int> tabElmt = g.getIndicePos(nouvPos);
@@ -154,4 +152,3 @@ void adventurerMoveManager::move(ground&g,int direction)
 
 
 }
-

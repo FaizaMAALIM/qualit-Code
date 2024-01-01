@@ -9,8 +9,7 @@ class ground;
 class amulet;
 class door;
 class outside;
-
-//GESTIONNAIRE D AFFICHAGE DES DIFFERENTS ELEMENTS PRESENTS SUR LE TERRAIN
+class money;
 
 
 class viewManager
@@ -24,9 +23,7 @@ class viewManager
         virtual void displayMonster(const monster &m) const = 0;
         virtual void displayDoor(const door &d) const = 0;
         virtual void displayOutside(const outside &o) const = 0;
-
-
-
+        virtual void displayMoney(const money &m) const = 0;
 
 };
 

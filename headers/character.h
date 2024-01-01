@@ -2,6 +2,8 @@
 #define CHARACTER_H_INCLUDED
 #include "groundElement.h"
 #include "position.h"
+#include "movementManager.h"
+class attackManager;
 class ground;
 
 //CLASS REPRESENTANT UN PERSONNAGE DU TERRAIN ( monstres ou aventurier )
@@ -10,9 +12,11 @@ class ground;
 class character : public groundElement
 {
     public:
-        character(const position &p);
+        character(const position &p,int pf,int pv);
         virtual ~character()= default;
-        
+        double attack(attackManager &attackManag);
+        bool receiveAttack(attackManager &attackManag,double force);
+
         //GETTERS
         int forcePoints() const;
         int lifePoints() const;
@@ -21,7 +25,7 @@ class character : public groundElement
         void setForcePoints(double nouvForce);
         void setLifePoints(double nouvLife);
 
-    
+
     private:
         int d_forcePoints=100;
         int d_lifePoints=1000;

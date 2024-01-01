@@ -16,7 +16,7 @@ TEST_CASE("Test de la classe door")
         REQUIRE_EQ(d.getPosition().getLine(),9);
         REQUIRE_EQ(d.getPosition().getColumn(),3);
     }
-    
+
 }
 
 

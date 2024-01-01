@@ -11,6 +11,14 @@
 
 blindMonsterMoveManager::blindMonsterMoveManager(const position&pos):movementManager{pos}{}
 
+
+//UN MONSTRE AVEUGLE SE DEPLACE DANS 8 DIRECTIONS:
+/*
+1 2 3
+4 * 6
+7 8 9
+*/
+
 position blindMonsterMoveManager::directionPosition(int direction)
 {
     position p{};
@@ -56,7 +64,6 @@ position blindMonsterMoveManager::directionPosition(int direction)
     return p;
 }
 
-
 int blindMonsterMoveManager::directionAleatoire() const
 {
     std::random_device rd;
@@ -68,6 +75,7 @@ int blindMonsterMoveManager::directionAleatoire() const
 
     return direction;
 }
+
 
 position blindMonsterMoveManager::possiblePosition(ground &g)
 {
@@ -89,6 +97,7 @@ position blindMonsterMoveManager::possiblePosition(ground &g)
     return directionPosition(direction);
 
 }
+
 
 void blindMonsterMoveManager::move(ground &g, int direction)
 {
@@ -117,7 +126,7 @@ void blindMonsterMoveManager::move(ground &g, int direction)
 
         char t=g.typeOf(indiceNouv);
 
-        if(t=='E')
+        if(t=='E') // CASE VIDE => LE MONSTRE Y VA
         {
             monster->changePosition(nouvPos);
         }
@@ -128,13 +137,18 @@ void blindMonsterMoveManager::move(ground &g, int direction)
             int indiceAdv = g.getIndiceAdventurer();
             auto adv = dynamic_cast<adventurer*>(g.getElementsTable()[indiceAdv].get()) ;
 
+            //LE MONSTRE LANCE UNE ATTAQUE
             monsterAttackManager mnstrAttackManager;
             double force = monster->attack(mnstrAttackManager);
 
+            // L'ADV RECOIT L ATTAQUE
             adventurerAttackManager advAttackManager;
             bool mort = adv->receiveAttack(advAttackManager,force);
         }
 
- }
+
+
+
+        }
 
 }

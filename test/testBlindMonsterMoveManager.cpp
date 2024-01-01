@@ -1,4 +1,4 @@
- #ifndef TESTBLINDMONSTERMOVEMANAGER_H
+#ifndef TESTBLINDMONSTERMOVEMANAGER_H
 #define TESTBLINDMONSTERMOVEMANAGER_H
 #include "doctest.h"
 #include "position.h"

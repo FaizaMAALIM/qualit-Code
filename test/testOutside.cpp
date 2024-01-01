@@ -17,7 +17,7 @@ TEST_CASE("Test de la classe outside")
         REQUIRE_EQ(o.getPosition().getColumn(),2);
 
     }
-    
+
 }
 
 

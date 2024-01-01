@@ -11,8 +11,7 @@ class adventurerAttackManager : public attackManager
         double attack(groundElement *elem) override;
         bool receiveAttack(groundElement *elem,double force) override;
 
-
-
 };
 
 #endif
+

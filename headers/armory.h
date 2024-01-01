@@ -6,7 +6,6 @@ class armory : public weapon
 {
     public:
         armory(double solidite);
-        
 };
 
 

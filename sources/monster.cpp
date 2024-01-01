@@ -1,9 +1,10 @@
 #include "monster.h"
 #include "viewManager.h"
 #include <iostream>
+#include "attackManager.h"
 #include "ground.h"
-        
-monster::monster(const position &pos, double hability) : character{pos},d_hability{hability} {}
+
+monster::monster(const position &pos,int pf,int pv, double hability) : character{pos,pf,pv},d_hability{hability} {}
 
 bool monster::isAtOneCaseAdv(ground &g)
 {
@@ -14,7 +15,7 @@ bool monster::isAtOneCaseAdv(ground &g)
 
     int difLine=std::abs(lineMonster-lineAdv);
     int difCol =std::abs(colMonster-colAdv);
-   
+
     return difLine<=1 && difCol<=1;
 }
 
@@ -26,6 +27,6 @@ double monster::getHability() const
 
 void monster::display(const viewManager& view) const
 {
-    //APPEL LAFFICHEUR QUI LAFFICHE (passer lafficheur en parametre)
     view.displayMonster(*this);
 }
+

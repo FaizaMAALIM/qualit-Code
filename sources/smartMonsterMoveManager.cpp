@@ -1,4 +1,4 @@
- #include "smartMonsterMoveManager.h"
+#include "smartMonsterMoveManager.h"
 #include "ground.h"
 #include "smartMonster.h"
 #include <cmath>
@@ -57,18 +57,9 @@ bool smartMonsterMoveManager::isNearAdventurer(ground &g) const
     return difLine<8 && difCol<8;
 }
 
-position smartMonsterMoveManager::aleatoirePosition()
-{
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::vector<int> directionsTab = {2, 4, 6, 8};
-    std::uniform_int_distribution<> distrib(0, directionsTab.size() - 1);
-    int i = distrib(gen);
 
-    int directionAleat = directionsTab[i];
-    return directionPosition(directionAleat);
-}
+
 
 int smartMonsterMoveManager::choixDirection(int d1,int d2,const ground &g)
 {
@@ -80,15 +71,15 @@ int smartMonsterMoveManager::choixDirection(int d1,int d2,const ground &g)
    int nbElem1 = g.nbElmtsPos(p1);
    int nbElem2 = g.nbElmtsPos(p2);
 
-    if(nbElem1>1)
+    if(nbElem1>1) //plus qu'une personne en d1 => il ny va pas
     {
         direction = d2;
     }
-    else if(nbElem2>1)
+    else if(nbElem2>1) //plus qu'une personne en d2 => il ny va pas
     {
         direction = d1;
     }
-    else if(nbElem1<2 && nbElem2<2)
+    else if(nbElem1<2 && nbElem2<2) // => choix en fonction du type
     {
         int i1=g.indicePos(p1);
         int i2=g.indicePos(p2);
@@ -96,11 +87,11 @@ int smartMonsterMoveManager::choixDirection(int d1,int d2,const ground &g)
         char t1=g.typeOf(i1);
         char t2=g.typeOf(i2);
 
-        if(t1=='W'|| t1=='B' ||t1=='S')
+        if(t1=='W'|| t1=='B' ||t1=='S')  //1 ERE POS PAS LIBRE
         {
             direction = d2;
         }
-        else
+        else //1 ERE POS LIBRE
         {
             direction = d1;
         }
@@ -108,6 +99,8 @@ int smartMonsterMoveManager::choixDirection(int d1,int d2,const ground &g)
 
     return direction;
 }
+
+
 
 position smartMonsterMoveManager::possiblePosition(ground&g)
 {
@@ -148,7 +141,7 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
         }
         else{ // AU DESSUS SUR LA MEME COLONNE 1 DIRECTIONS POSSIBLE : 2
             position ps = directionPosition(2);
-            if(g.nbElmtsPos(ps)<2) //pas de bataille en cours sur la case
+            if(g.nbElmtsPos(ps)<2)
             {
                 pos = ps;
             }
@@ -174,7 +167,7 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
         else{ // EN DESSOUS SUR LA MEME COLONNE 1 DIRECTION POSSIBLE : 8
 
             position ps = directionPosition(8);
-            if(g.nbElmtsPos(ps)<2) //pas de bataille en cours sur la case
+            if(g.nbElmtsPos(ps)<2)
             {
                 pos = ps;
             }
@@ -187,7 +180,7 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
     {
         if(colMonster<colAdv){ // A GAUCHE : 1 DIRECTION POSSIBLE : 6
             position ps = directionPosition(6);
-            if(g.nbElmtsPos(ps)<2) //pas de bataille en cours sur la case
+            if(g.nbElmtsPos(ps)<2)
             {
                 pos = ps;
             }
@@ -198,7 +191,7 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
         else{ // A DROITE : 1 DIRECTION POSSIBLE : 4
 
             position ps = directionPosition(4);
-            if(g.nbElmtsPos(ps)<2) //pas de bataille en cours sur la case
+            if(g.nbElmtsPos(ps)<2)
             {
                 pos = ps;
             }
@@ -212,7 +205,7 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
         if(lineMonster>lineAdv){ // AU DESSUS 1 DIRECTION POSSIBLE : 2
 
             position ps = directionPosition(2);
-            if(g.nbElmtsPos(ps)<2) //pas de bataille en cours sur la case
+            if(g.nbElmtsPos(ps)<2)
             {
                 pos = ps;
             }
@@ -223,7 +216,7 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
         else{ // EN DESSOUS: 1 DIRECTION POSSIBLE : 8
 
             position ps = directionPosition(8);
-            if(g.nbElmtsPos(ps)<2) //pas de bataille en cours sur la case
+            if(g.nbElmtsPos(ps)<2)
             {
                 pos = ps;
             }
@@ -235,6 +228,26 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
 
     return pos;
 }
+
+
+position smartMonsterMoveManager::aleatoirePosition() //ground &g)
+{
+    /*
+      2
+    4 $ 6
+      8
+    */
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::vector<int> directionsTab = {2, 4, 6, 8};
+    std::uniform_int_distribution<> distrib(0, directionsTab.size() - 1);
+    int i = distrib(gen);
+
+    int directionAleat = directionsTab[i];
+    return directionPosition(directionAleat);
+}
+
+
 
 
 void smartMonsterMoveManager::move(ground &g,int direction)
@@ -291,7 +304,7 @@ void smartMonsterMoveManager::move(ground &g,int direction)
             }
         }
     }
-    else{
+    else{ //LE MONSTRE = + DE 8 CASES = déplacement aléatoire
 
 
         position p{aleatoirePosition()};
@@ -314,6 +327,8 @@ void smartMonsterMoveManager::move(ground &g,int direction)
             }
 
         }
+
+
 
     }
 

@@ -1,4 +1,3 @@
- 
 #ifndef MOVEMENTMANAGER_H_INCLUDED
 #define MOVEMENTMANAGER_H_INCLUDED
 #include "position.h"
@@ -12,9 +11,9 @@ class movementManager
         position getPos() const;
 
         virtual position directionPosition(int direction)=0;
+        virtual void move(ground &g,int direction)=0;
 
-
-  private:
+  protected:
         position d_position;
 
 };

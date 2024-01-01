@@ -11,7 +11,8 @@ class position
         int getLine() const;
         int getColumn() const;
         void setPosition(int line,int col);
-    public:
+
+    private:
         int d_line,d_column;
 };
 

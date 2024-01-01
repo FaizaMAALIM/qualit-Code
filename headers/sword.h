@@ -6,7 +6,7 @@ class sword : public weapon
 {
     public:
         sword(double solidite);
-        
+
 };
 
 

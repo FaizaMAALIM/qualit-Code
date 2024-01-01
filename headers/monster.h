@@ -10,13 +10,15 @@ class monster : public character
 {
     public:
         virtual ~monster()=default;
-        monster(const position &pos, double hability=0.8);
+        monster(const position &pos,int pf,int pv, double hability=0.8);
         void display(const viewManager& view) const override;
         double getHability() const;
         bool isAtOneCaseAdv(ground &g);
+
+
     private:
         double d_hability;
-   
+
 };
 
 #endif

@@ -39,6 +39,7 @@ double adventurerAttackManager::attack(groundElement *elem)
     return force;
 }
 
+
 bool adventurerAttackManager::receiveAttack(groundElement *elem,double force)
 {
     auto adv=dynamic_cast<adventurer*>(elem);
@@ -47,7 +48,7 @@ bool adventurerAttackManager::receiveAttack(groundElement *elem,double force)
     double pfAbsorbesArmure = 0.75 * force;
     double armorSolidity = adv->getArmor().getSolidity();
 
-    if(armorSolidity > (0.5)*pfAbsorbesArmure) //amure peut abs 3/4 pf
+    if(armorSolidity > (0.5)*pfAbsorbesArmure)
     {
 
         double nouvsol = armorSolidity - (0.5)*pfAbsorbesArmure;

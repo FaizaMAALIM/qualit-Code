@@ -39,10 +39,10 @@ TEST_CASE("Test de la classe ground")
         ground g;
         int nbl=10;
         int nbc=3;
-        g.setSize(10,3);
+        g.setSize(nbc,nbl);
 
-        REQUIRE_EQ(g.getNbLines(),10);
-        REQUIRE_EQ(g.getNbColumns(),3);
+        REQUIRE_EQ(g.getNbLines(),nbl);
+        REQUIRE_EQ(g.getNbColumns(),nbc);
 
     }
     SUBCASE("Test ajouter élément au ground")
@@ -64,9 +64,9 @@ TEST_CASE("Test de la classe ground")
 
             auto adv = std::make_unique<adventurer>(p1); //Créer un élément
             g.addElementToGround(std::move(adv));   //l'ajouter
-            
-            auto w = std::make_unique<wall>(p2); 
-            g.addElementToGround(std::move(w));   
+
+            auto w = std::make_unique<wall>(p2);
+            g.addElementToGround(std::move(w));
 
             bool t1= dynamic_cast<adventurer*>(g.getElementsTable()[0].get());
             bool t2= dynamic_cast<wall*>(g.getElementsTable()[1].get());
@@ -74,7 +74,7 @@ TEST_CASE("Test de la classe ground")
             REQUIRE_EQ(t1,true);
             REQUIRE_EQ(t2,true);
 
-        }     
+        }
     }
     SUBCASE("Test enlever élément du ground")
     {
@@ -111,8 +111,8 @@ TEST_CASE("Test de la classe ground")
     SUBCASE("Test position de l'element")
     {
         position p{1,1};
-        auto w = std::make_unique<wall>(p); 
-        g.addElementToGround(std::move(w));   
+        auto w = std::make_unique<wall>(p);
+        g.addElementToGround(std::move(w));
 
         REQUIRE_EQ(g.posOf(0).getLine(),p.getLine());
         REQUIRE_EQ(g.posOf(0).getColumn(),p.getColumn());
@@ -123,46 +123,46 @@ TEST_CASE("Test de la classe ground")
         position p1{1,1};
         position p2{1,2};
 
-        auto w = std::make_unique<wall>(p2); 
-        auto adv = std::make_unique<adventurer>(p1); 
+        auto w = std::make_unique<wall>(p2);
+        auto adv = std::make_unique<adventurer>(p1);
 
-        g.addElementToGround(std::move(w));   
+        g.addElementToGround(std::move(w));
         g.addElementToGround(std::move(adv));
 
         REQUIRE_EQ(g.getIndiceAdventurer(),1);
     }
     SUBCASE("Test nombre d'éléments à une position")
     {
-        position posRecherchee{2,2}; 
+        position posRecherchee{2,2};
 
 
         SUBCASE(" Test 0 elements")
         {
             position pos{2,3};
             auto w = std::make_unique<wall>(pos);
-            g.addElementToGround(std::move(w));  
+            g.addElementToGround(std::move(w));
 
             REQUIRE_EQ(g.nbElmtsPos(posRecherchee),0);
         }
         SUBCASE("Test 1 element")
         {
-            auto w = std::make_unique<wall>(posRecherchee); 
-            g.addElementToGround(std::move(w));   
+            auto w = std::make_unique<wall>(posRecherchee);
+            g.addElementToGround(std::move(w));
 
             REQUIRE_EQ(g.nbElmtsPos(posRecherchee),1);
         }
         SUBCASE("Test 2 elements")
         {
-               
-            auto w = std::make_unique<wall>(posRecherchee); 
-            auto adv = std::make_unique<adventurer>(posRecherchee); 
 
-            g.addElementToGround(std::move(w));   
+            auto w = std::make_unique<wall>(posRecherchee);
+            auto adv = std::make_unique<adventurer>(posRecherchee);
+
+            g.addElementToGround(std::move(w));
             g.addElementToGround(std::move(adv));
 
             REQUIRE_EQ(g.nbElmtsPos(posRecherchee),2);
         }
-        
+
 
     }
     SUBCASE("Test indice élément en fonction de sa position et son type")
@@ -173,8 +173,8 @@ TEST_CASE("Test de la classe ground")
         auto adv = std::make_unique<adventurer>(p);  //indice 0
         auto w = std::make_unique<wall>(p);          //indice 1
 
-        g.addElementToGround(std::move(adv));    
-        g.addElementToGround(std::move(w)); 
+        g.addElementToGround(std::move(adv));
+        g.addElementToGround(std::move(w));
 
         int indiceAdv = 0;
         int indiceWall = 1;
@@ -191,28 +191,28 @@ TEST_CASE("Test de la classe ground")
         auto adv = std::make_unique<adventurer>(p);  //indice 0
         auto w = std::make_unique<wall>(p1);          //indice 1
 
-        g.addElementToGround(std::move(adv));    
+        g.addElementToGround(std::move(adv));
         g.addElementToGround(std::move(w));
 
         int indiceAdv = 0;
         int indiceWall = 1;
- 
+
 
         REQUIRE_EQ(g.indicePos(p),indiceAdv);
     }
     SUBCASE("Test récupération indices de tous les elements à une position donnée")
     {
-        position posRecherchee{2,2}; 
+        position posRecherchee{2,2};
         position autrePos{1,2};
-       
-        auto w1 = std::make_unique<wall>(posRecherchee); 
-        auto adv = std::make_unique<adventurer>(autrePos);
-        auto w2 = std::make_unique<wall>(posRecherchee); 
- 
 
-        g.addElementToGround(std::move(w1));   
+        auto w1 = std::make_unique<wall>(posRecherchee);
+        auto adv = std::make_unique<adventurer>(autrePos);
+        auto w2 = std::make_unique<wall>(posRecherchee);
+
+
+        g.addElementToGround(std::move(w1));
         g.addElementToGround(std::move(adv));
-        g.addElementToGround(std::move(w2));   
+        g.addElementToGround(std::move(w2));
 
         int indiceW1=0;
         int indiceAdv=1;
@@ -226,7 +226,13 @@ TEST_CASE("Test de la classe ground")
 
 
     }
-    
+    SUBCASE("Test générer un nombre aléatoire entre n1 et n2")
+    {
+        int n1=2,n2=14;
+        REQUIRE_GE(g.aleatNumber(n1,n2), n1);
+        REQUIRE_LE(g.aleatNumber(n1,n2), n2);
+    }
+
 }
 
 
