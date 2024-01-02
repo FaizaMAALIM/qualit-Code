@@ -26,35 +26,35 @@ position blindMonsterMoveManager::directionPosition(int direction)
     switch (direction)
     {
 
-    case 1 :
+    case HAUT_GAUCHE :
         p={getPos().getLine()-1,getPos().getColumn()-1};
         break;
 
-    case 2 :
+    case HAUT :
         p = {getPos().getLine()-1,getPos().getColumn()};
         break;
 
-    case 3 :
+    case HAUT_DROITE :
         p = {getPos().getLine()-1, getPos().getColumn()+1};
         break;
 
-    case 4 :
+    case GAUCHE :
         p = {getPos().getLine(),getPos().getColumn()-1};
         break;
 
-    case 6 :
+    case DROITE :
         p = {getPos().getLine(),getPos().getColumn()+1};
         break;
 
-    case 7 :
+    case BAS_GAUCHE :
         p = {getPos().getLine()+1, getPos().getColumn()-1};
         break;
 
-    case 8 :
+    case BAS :
         p = {getPos().getLine()+1,getPos().getColumn()};
         break;
 
-    case 9 :
+    case BAS_DROITE :
         p= {getPos().getLine()+1, getPos().getColumn()+1};
         break;
 
@@ -69,7 +69,7 @@ int blindMonsterMoveManager::directionAleatoire() const
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::vector<int> directionsTab = {1, 2, 3, 4, 6, 7, 8, 9};
+    std::vector<int> directionsTab = {HAUT_GAUCHE, HAUT, HAUT_DROITE, GAUCHE, DROITE, BAS_GAUCHE, BAS, BAS_DROITE};
     std::uniform_int_distribution<> distrib(0, directionsTab.size() - 1);
     int i = distrib(gen);
     int direction= directionsTab[i];

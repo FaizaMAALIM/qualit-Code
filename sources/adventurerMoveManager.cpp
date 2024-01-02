@@ -19,39 +19,39 @@ position adventurerMoveManager::directionPosition(int direction)
     switch (direction)
     {
 
-    case 1 : //DIAGONALE HAUT GAUCHE = ligne d en haut colonne de gauche
+    case HAUT_GAUCHE : 
         p={getPos().getLine()-1,getPos().getColumn()-1};
         break;
 
-    case 2 :  // VERS LE HAUT = ligne d'en haut meme colonne
+    case HAUT :  
         p = {getPos().getLine()-1,getPos().getColumn()};
         break;
 
-    case 3 : //DIAGONALE HAUT DROITE = ligne d en haut colonne de droite
+    case HAUT_DROITE : 
         p = {getPos().getLine()-1, getPos().getColumn()+1};
         break;
 
-    case 4 : // VERS LA GAUCHE = meme ligne colonne de gauche
+    case GAUCHE : 
         p = {getPos().getLine(),getPos().getColumn()-1};
         break;
 
-    case 5 : //RESTER SUR PLACE
+    case NE_BOUGE_PAS : 
         p = {getPos()};
         break;
 
-    case 6 : // VERS LA DROITE = meme ligne colonne de droite
+    case DROITE : 
         p = {getPos().getLine(),getPos().getColumn()+1};
         break;
 
-    case 7 : //DIAGONALE BAS GAUCHE = ligne den bas colonne de gauche
+    case BAS_GAUCHE : 
         p = {getPos().getLine()+1, getPos().getColumn()-1};
         break;
 
-    case 8 : // VERS LE BAS = ligne d'en bas meme colonne
+    case BAS : 
         p = {getPos().getLine()+1,getPos().getColumn()};
         break;
 
-    case 9 : // DIAGONALE BAS DROITE = ligne den bas colonne de droite
+    case BAS_DROITE : 
         p= {getPos().getLine()+1, getPos().getColumn()+1};
         break;
 

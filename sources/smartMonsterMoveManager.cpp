@@ -28,16 +28,16 @@ position smartMonsterMoveManager::directionPosition(int direction)
     position p{};
     switch (direction)
     {
-    case 2:  // VERS LE HAUT = ligne d'en haut meme colonne
+    case HAUT:  // ligne d'en haut meme colonne
         p = {getPos().getLine()-1,getPos().getColumn()};
         break;
-    case 8: // VERS LE BAS = ligne d'en bas meme colonne
+    case BAS: // ligne d'en bas meme colonne
         p = {getPos().getLine()+1,getPos().getColumn()};
         break;
-    case 4: // VERS LA GAUCHE = meme ligne colonne de gauche
+    case GAUCHE: // meme ligne colonne de gauche
         p = {getPos().getLine(),getPos().getColumn()-1};
         break;
-    case 6: // VERS LA DROITE = meme ligne colonne de droite
+    case DROITE: // meme ligne colonne de droite
         p = {getPos().getLine(),getPos().getColumn()+1};
         break;
     default:
@@ -134,17 +134,17 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
     {
         if(colMonster<colAdv)  //AU DESSUS A GAUCHE : aller en 2 ou 6
         {
-           int direction = choixDirection(2,6,g);
+           int direction = choixDirection(HAUT,DROITE,g);
            pos = directionPosition(direction);
         }
         else if(colMonster>colAdv)  //AU DESSUS A DROITE : aller en 4 ou 2
         {
-           int direction = choixDirection(4,2,g);
+           int direction = choixDirection(GAUCHE,HAUT,g);
            pos = directionPosition(direction);
 
         }
         else{ // AU DESSUS SUR LA MEME COLONNE 1 DIRECTIONS POSSIBLE : 2
-            position ps = directionPosition(2);
+            position ps = directionPosition(HAUT);
             if(g.nbElmtsPos(ps)<2)
             {
                 pos = ps;
@@ -159,18 +159,18 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
     {
         if(colMonster<colAdv) // EN DESSOUS A GAUCHE: aller en 8 ou 6
         {
-            int direction = choixDirection(8,6,g);
+            int direction = choixDirection(BAS,DROITE,g);
             pos = directionPosition(direction);
         }
         else if(colMonster>colAdv) // EN DESSOUS A DROITE: 8 ou 4
         {
-           int direction = choixDirection(8,4,g);
+           int direction = choixDirection(BAS,GAUCHE,g);
            pos = directionPosition(direction);
 
         }
         else{ // EN DESSOUS SUR LA MEME COLONNE 1 DIRECTION POSSIBLE : 8
 
-            position ps = directionPosition(8);
+            position ps = directionPosition(BAS);
             if(g.nbElmtsPos(ps)<2)
             {
                 pos = ps;
@@ -183,7 +183,7 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
     else if (lineMonster==lineAdv) // LE MONSTRE EST SUR LA MEME LIGNE
     {
         if(colMonster<colAdv){ // A GAUCHE : 1 DIRECTION POSSIBLE : 6
-            position ps = directionPosition(6);
+            position ps = directionPosition(DROITE);
             if(g.nbElmtsPos(ps)<2)
             {
                 pos = ps;
@@ -194,7 +194,7 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
         }
         else{ // A DROITE : 1 DIRECTION POSSIBLE : 4
 
-            position ps = directionPosition(4);
+            position ps = directionPosition(GAUCHE);
             if(g.nbElmtsPos(ps)<2)
             {
                 pos = ps;
@@ -208,7 +208,7 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
     {
         if(lineMonster>lineAdv){ // AU DESSUS 1 DIRECTION POSSIBLE : 2
 
-            position ps = directionPosition(2);
+            position ps = directionPosition(HAUT);
             if(g.nbElmtsPos(ps)<2)
             {
                 pos = ps;
@@ -219,7 +219,7 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
         }
         else{ // EN DESSOUS: 1 DIRECTION POSSIBLE : 8
 
-            position ps = directionPosition(8);
+            position ps = directionPosition(BAS);
             if(g.nbElmtsPos(ps)<2)
             {
                 pos = ps;
@@ -243,7 +243,7 @@ int smartMonsterMoveManager::directionAleatoire() const//Position() //ground &g)
     */
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::vector<int> directionsTab = {2, 4, 6, 8};
+    std::vector<int> directionsTab = {HAUT, DROITE, GAUCHE, BAS};
     std::uniform_int_distribution<> distrib(0, directionsTab.size() - 1);
     int i = distrib(gen);
 
