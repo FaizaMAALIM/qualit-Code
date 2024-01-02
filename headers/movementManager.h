@@ -13,6 +13,8 @@ class movementManager
         virtual position directionPosition(int direction)=0;
         virtual void move(ground &g,int direction)=0;
 
+        
+
   protected:
         position d_position;
 

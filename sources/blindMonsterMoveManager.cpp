@@ -9,7 +9,8 @@
 #include "blindMonsterMoveManager.h"
 #include "adventurer.h"
 
-blindMonsterMoveManager::blindMonsterMoveManager(const position&pos):movementManager{pos}{}
+#include "monsterMoveManager.h"
+blindMonsterMoveManager::blindMonsterMoveManager(const position&pos):monsterMoveManager{pos}{}
 
 
 //UN MONSTRE AVEUGLE SE DEPLACE DANS 8 DIRECTIONS:
@@ -145,10 +146,6 @@ void blindMonsterMoveManager::move(ground &g, int direction)
             adventurerAttackManager advAttackManager;
             bool mort = adv->receiveAttack(advAttackManager,force);
         }
-
-
-
-
-        }
+    }
 
 }

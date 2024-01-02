@@ -8,7 +8,11 @@
 #include "monsterAttackManager.h"
 #include "adventurer.h"
 #include "adventurerAttackManager.h"
-smartMonsterMoveManager::smartMonsterMoveManager(const position& p):movementManager{p}{}
+
+#include "monsterMoveManager.h"
+
+smartMonsterMoveManager::smartMonsterMoveManager(const position& p):monsterMoveManager{p}{}
+
 
 
 //UN MONSTRE INTELLIGENT SE DEPLACE DANS 4 DIRECTIONS: 2 4 6 ou 8
@@ -230,7 +234,7 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
 }
 
 
-position smartMonsterMoveManager::aleatoirePosition() //ground &g)
+int smartMonsterMoveManager::directionAleatoire() const//Position() //ground &g)
 {
     /*
       2
@@ -244,7 +248,8 @@ position smartMonsterMoveManager::aleatoirePosition() //ground &g)
     int i = distrib(gen);
 
     int directionAleat = directionsTab[i];
-    return directionPosition(directionAleat);
+    return directionAleat;
+    //return directionPosition(directionAleat);
 }
 
 
@@ -306,8 +311,12 @@ void smartMonsterMoveManager::move(ground &g,int direction)
     }
     else{ //LE MONSTRE = + DE 8 CASES = déplacement aléatoire
 
-
-        position p{aleatoirePosition()};
+        //TEST CHANGEMENT
+       // position p{aleatoirePosition()};
+       int dirAleat =  directionAleatoire();
+       position p{directionPosition(dirAleat)};
+       
+       
         int nbElm= g.nbElmtsPos(p);
 
         if(nbElm<2 && p.getColumn()<g.getNbColumns()&& p.getColumn()>=0 && p.getLine()<g.getNbLines() && p.getLine()>=0)
