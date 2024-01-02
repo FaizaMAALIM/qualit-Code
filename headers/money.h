@@ -2,8 +2,10 @@
 #define MONEY_H_INCLUDED
 #include "groundElement.h"
 class viewManager;
+#include "inertElement.h"
 
-class money : public groundElement
+
+class money : public inertElement
 {
     public:
         money(const position &p,int value=10);

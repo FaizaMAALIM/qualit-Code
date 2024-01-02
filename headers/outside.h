@@ -2,8 +2,10 @@
 #define OUTSIDE_H_INCLUDED
 #include "groundElement.h"
 class viewManager;
+#include "inertElement.h"
 
-class outside : public groundElement
+
+class outside : public inertElement
 {
     public:
         outside(const position &p);

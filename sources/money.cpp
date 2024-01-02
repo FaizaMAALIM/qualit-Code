@@ -1,9 +1,11 @@
 #include "money.h"
 #include "position.h"
 #include "viewManager.h"
+#include "inertElement.h"
 
 
-money::money(const position &p,int value):groundElement{p},d_value{value}{}
+
+money::money(const position &p,int value):inertElement{p},d_value{value}{}
 
 void money::display(const viewManager& view) const
 {

@@ -1,7 +1,7 @@
 #include "outside.h"
 #include "viewManager.h"
 
-outside::outside(const position &p):groundElement{p}{}
+outside::outside(const position &p):inertElement{p}{}
 
 
 

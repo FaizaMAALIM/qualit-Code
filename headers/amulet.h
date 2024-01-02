@@ -2,8 +2,9 @@
 #define AMULET_H_INCLUDED
 #include "groundElement.h"
 class viewManager;
+#include "inertElement.h"
 
-class amulet : public groundElement
+class amulet : public inertElement
 {
     public:
         amulet(const position &p);

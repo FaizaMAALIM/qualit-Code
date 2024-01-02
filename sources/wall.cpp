@@ -1,7 +1,7 @@
 #include "wall.h"
 #include "viewManager.h"
 
-wall::wall(const position &p):groundElement{p}{}
+wall::wall(const position &p):inertElement{p}{}
 
 
 

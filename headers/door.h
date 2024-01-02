@@ -3,7 +3,10 @@
 #include "groundElement.h"
 class viewManager;
 
-class door : public groundElement
+#include "inertElement.h"
+
+
+class door : public inertElement
 {
     public:
         door(const position &p);

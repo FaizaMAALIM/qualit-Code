@@ -2,8 +2,10 @@
 #define WALL_H_INCLUDED
 #include "groundElement.h"
 class viewManager;
+#include "inertElement.h"
 
-class wall : public groundElement
+
+class wall : public inertElement
 {
     public:
         wall(const position &p);

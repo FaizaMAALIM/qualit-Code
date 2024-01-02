@@ -1,7 +1,9 @@
 #include "door.h"
 #include "viewManager.h"
+#include "inertElement.h"
 
-door::door(const position &p):groundElement{p}{}
+
+door::door(const position &p):inertElement{p}{}
 
 
 
