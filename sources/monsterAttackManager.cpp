@@ -33,7 +33,7 @@ double monsterAttackManager::attack(groundElement *elem)
 
     if(randomnb > mnstr->getHability())
     {
-        force*=0.9;
+        force*=POURCENT_FORCE_ATTAQUE;
     }
     return force;
 }

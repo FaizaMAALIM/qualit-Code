@@ -151,6 +151,9 @@ void adventurerMoveManager::move(ground&g,int direction)
 
 }
 
+
+
+
 int adventurerMoveManager::recupMoney(const position &nouvPos,ground &g)
 {
     int indiceMoney = g.getIndiceElmt(nouvPos,'M');

@@ -9,8 +9,8 @@ class monsterAttackManager : public attackManager
       monsterAttackManager();
       double attack(groundElement *elem) override;
       bool receiveAttack(groundElement *elem,double force) override;
-      //moi
 
+    const double POURCENT_FORCE_ATTAQUE{0.9};
 };
 
 

@@ -28,9 +28,9 @@ double adventurerAttackManager::attack(groundElement *elem)
         force =adv->forcePoints() + swordSolidity;
         double randomnb = pickRandom();
 
-        if(randomnb>0.8)
+        if(randomnb>PROBA_RECOIT_ATTAQUE)
         {
-            force *= 0.9;
+            force *= POURCENT_FORCE_ATTAQUE;
         }
 
         adv->setSwordSolidity(swordSolidity-1);
@@ -45,7 +45,7 @@ bool adventurerAttackManager::receiveAttack(groundElement *elem,double force)
     auto adv=dynamic_cast<adventurer*>(elem);
     double reste;
     bool mort = false;
-    double pfAbsorbesArmure = 0.75 * force;
+    double pfAbsorbesArmure = POURCENT_ABSORPTION_ATTAQUE * force;
     double armorSolidity = adv->getArmor().getSolidity();
 
     if(armorSolidity > (0.5)*pfAbsorbesArmure)
@@ -54,7 +54,7 @@ bool adventurerAttackManager::receiveAttack(groundElement *elem,double force)
         double nouvsol = armorSolidity - (0.5)*pfAbsorbesArmure;
 
         adv->setArmorSolidity(nouvsol);
-        reste = 0.25*force;
+        reste = PART_NON_ASBORBEE*force;
 
     }
     else
