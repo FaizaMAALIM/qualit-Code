@@ -250,14 +250,9 @@ int smartMonsterMoveManager::directionAleatoire() const
 }
 
 
-
-
-void smartMonsterMoveManager::move(ground &g,int direction)
+void smartMonsterMoveManager::deplacementProche(ground&g)
 {
-
-    if(isNearAdventurer(g)) 
-    {
-        position p{possiblePosition(g)};
+    position p{possiblePosition(g)};
 
         if(p.getColumn()!=-1 && p.getLine()!=-1 && p.getColumn()<g.getNbColumns() && p.getLine()<g.getNbLines())
         {
@@ -305,11 +300,11 @@ void smartMonsterMoveManager::move(ground &g,int direction)
 
             }
         }
-    }
-    else{ //LE MONSTRE = + DE 8 CASES = déplacement aléatoire
+}
 
-       
-       int dirAleat =  directionAleatoire();
+void smartMonsterMoveManager::deplacementAleatoire(ground &g)
+{
+    int dirAleat =  directionAleatoire();
        position p{directionPosition(dirAleat)};
        
        
@@ -333,8 +328,20 @@ void smartMonsterMoveManager::move(ground &g,int direction)
 
         }
 
+}
 
 
+
+void smartMonsterMoveManager::move(ground &g,int direction)
+{
+
+    if(isNearAdventurer(g)) 
+    {
+        deplacementProche(g);
+      
+    }
+    else{ 
+        deplacementAleatoire(g);       
     }
 
 
