@@ -197,11 +197,11 @@ void game::play()
             }
             while (!std::cin.good() || !(rep==1||rep==2));
 
-            if(rep==1) //utiliser la bourse
+            if(rep==UTILISER_BOURSE) //utiliser la bourse
             {
                 useBourse(adv);
             }
-            else if(rep==2){ //se deplacer
+            else if(rep==SE_DEPLACER){ //se deplacer
                 depl=1;
             }
         }

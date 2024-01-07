@@ -14,7 +14,6 @@ class smartMonsterMoveManager : public monsterMoveManager
 
         position directionPosition(int direction) override;
         position possiblePosition(ground &g) override;
-       // position aleatoirePosition();
         int directionAleatoire() const override;
 
 

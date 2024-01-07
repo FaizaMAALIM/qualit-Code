@@ -28,7 +28,10 @@ class game
      void startDisplay();
      void rules();
      void gererErreurSaisie();
-};
+
+     const int SE_DEPLACER{2};
+     const int UTILISER_BOURSE{1};
+     };
 
 
 
