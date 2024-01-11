@@ -30,7 +30,16 @@ class movementManager
       static const int BAS {8};
       static const int BAS_DROITE {9};
 
+    //Constantes pour les types
 
+    const char BLINDMONSTER{'B'};
+    const char SMARTMONSTER{'S'};
+    const char AVENTURIER{'P'};
+    const char AMULET{'A'};
+    const char WALL{'W'};
+    const char VIDE{'E'};
+    const char MONEY{'M'};
+    const char SORTIE{'D'};
 
        
 

@@ -19,39 +19,39 @@ position adventurerMoveManager::directionPosition(int direction)
     switch (direction)
     {
 
-    case HAUT_GAUCHE : 
+    case HAUT_GAUCHE :
         p={getPos().getLine()-1,getPos().getColumn()-1};
         break;
 
-    case HAUT :  
+    case HAUT :
         p = {getPos().getLine()-1,getPos().getColumn()};
         break;
 
-    case HAUT_DROITE : 
+    case HAUT_DROITE :
         p = {getPos().getLine()-1, getPos().getColumn()+1};
         break;
 
-    case GAUCHE : 
+    case GAUCHE :
         p = {getPos().getLine(),getPos().getColumn()-1};
         break;
 
-    case NE_BOUGE_PAS : 
+    case NE_BOUGE_PAS :
         p = {getPos()};
         break;
 
-    case DROITE : 
+    case DROITE :
         p = {getPos().getLine(),getPos().getColumn()+1};
         break;
 
-    case BAS_GAUCHE : 
+    case BAS_GAUCHE :
         p = {getPos().getLine()+1, getPos().getColumn()-1};
         break;
 
-    case BAS : 
+    case BAS :
         p = {getPos().getLine()+1,getPos().getColumn()};
         break;
 
-    case BAS_DROITE : 
+    case BAS_DROITE :
         p= {getPos().getLine()+1, getPos().getColumn()+1};
         break;
 
@@ -69,14 +69,14 @@ void adventurerMoveManager::move(ground&g,int direction)
 
 
     int indiceAdv{g.getIndiceAdventurer()};
-    char type;
+    char typeCase;
     auto adv=dynamic_cast<adventurer*>(g.getElementsTable()[indiceAdv].get());
 
     if(nouvPos.getColumn()<g.getNbColumns()&& nouvPos.getColumn()>=0 && nouvPos.getLine()<g.getNbLines() && nouvPos.getLine()>=0)
     {
         int indice = g.indicePos(nouvPos);
 
-        type=g.typeOf(indice);
+        typeCase=g.typeOf(indice);
 
         if(g.nbElmtsPos(nouvPos)==2)
         {
@@ -85,20 +85,20 @@ void adventurerMoveManager::move(ground&g,int direction)
            {
                 if(g.typeOf(tabElmt[i])!='P')
                 {
-                    type = g.typeOf(tabElmt[i]);
+                    typeCase = g.typeOf(tabElmt[i]);
                 }
            }
         }
 
 
-        if(type=='E') //vide => laventurier y va
+        if(typeCase==VIDE) //vide => laventurier y va
         {
             adv->changePosition(nouvPos);
         }
-        else if(type=='S' || type=='B') //MONSTRE => L'AVENTURIER y va + L ATTAQUE
+        else if(typeCase==SMARTMONSTER || typeCase==BLINDMONSTER)
         {
             adv->changePosition(nouvPos);
-            int indiceMonstre = g.getIndiceElmt(nouvPos,type);
+            int indiceMonstre = g.getIndiceElmt(nouvPos,typeCase);
             auto monstreptr =  dynamic_cast<monster*>(g.getElementsTable()[indiceMonstre].get());
 
             adventurerAttackManager advAttackManager;
@@ -120,14 +120,14 @@ void adventurerMoveManager::move(ground&g,int direction)
                 g.removeElement(indiceMonstre);
             }
         }
-        else if(type=='A') //AMULETTE
+        else if(typeCase==AMULET)
         {
            g.removeElement(indice);
            adv->changePosition(nouvPos);
            adv->setAmuletTrue();
 
         }
-        else if(type=='D') //case de sortie
+        else if(typeCase==SORTIE)
         {
             if(adv->hasAmulet())
             {
@@ -135,14 +135,14 @@ void adventurerMoveManager::move(ground&g,int direction)
             }
 
         }
-        else if(type=='M') //tas de pièces
+        else if(typeCase==MONEY)
         {
             int val = recupMoney(nouvPos,g);
             adv->addToBourse(val);
 
            g.removeElement(indice);
            adv->changePosition(nouvPos);
-           
+
 
         }
 

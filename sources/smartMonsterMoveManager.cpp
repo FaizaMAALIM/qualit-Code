@@ -28,13 +28,13 @@ position smartMonsterMoveManager::directionPosition(int direction)
     position p{};
     switch (direction)
     {
-    case HAUT:  
+    case HAUT:
         p = {getPos().getLine()-1,getPos().getColumn()};
         break;
-    case BAS: 
+    case BAS:
         p = {getPos().getLine()+1,getPos().getColumn()};
         break;
-    case GAUCHE: 
+    case GAUCHE:
         p = {getPos().getLine(),getPos().getColumn()-1};
         break;
     case DROITE:
@@ -83,7 +83,7 @@ int smartMonsterMoveManager::choixDirection(int d1,int d2,const ground &g)
     {
         direction = d1;
     }
-    else if(nbElem1<2 && nbElem2<2) // => choix en fonction du type
+    else if(nbElem1<2 && nbElem2<2)
     {
         int i1=g.indicePos(p1);
         int i2=g.indicePos(p2);
@@ -91,11 +91,11 @@ int smartMonsterMoveManager::choixDirection(int d1,int d2,const ground &g)
         char t1=g.typeOf(i1);
         char t2=g.typeOf(i2);
 
-        if(t1=='W'|| t1=='B' ||t1=='S')  
+        if(t1==WALL || t1==BLINDMONSTER ||t1== SMARTMONSTER)
         {
             direction = d2;
         }
-        else 
+        else
         {
             direction = d1;
         }
@@ -115,6 +115,7 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
     int lineMonster = getPos().getLine();
     int colMonster = getPos().getColumn();
     position pos{};
+    position posError{-1,-1};
 
     /*
       2
@@ -149,25 +150,25 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
                 pos = ps;
             }
             else{
-                pos={-1,-1};
+                pos=posError;
             }
 
         }
     }
     else if(lineMonster<lineAdv)
     {
-        if(colMonster<colAdv) 
+        if(colMonster<colAdv)
         {
             int direction = choixDirection(BAS,DROITE,g);
             pos = directionPosition(direction);
         }
-        else if(colMonster>colAdv) 
+        else if(colMonster>colAdv)
         {
            int direction = choixDirection(BAS,GAUCHE,g);
            pos = directionPosition(direction);
 
         }
-        else{ 
+        else{
 
             position ps = directionPosition(BAS);
             if(g.nbElmtsPos(ps)<2)
@@ -175,11 +176,11 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
                 pos = ps;
             }
             else{
-                pos={-1,-1};
+                pos=posError;
             }
         }
     }
-    else if (lineMonster==lineAdv) 
+    else if (lineMonster==lineAdv)
     {
         if(colMonster<colAdv){
             position ps = directionPosition(DROITE);
@@ -188,10 +189,10 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
                 pos = ps;
             }
             else{
-                pos={-1,-1};
+                pos=posError;
             }
         }
-        else{ 
+        else{
 
             position ps = directionPosition(GAUCHE);
             if(g.nbElmtsPos(ps)<2)
@@ -199,13 +200,13 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
                 pos = ps;
             }
             else{
-                pos={-1,-1};
+                pos=posError;
             }
         }
     }
-    else if(colMonster==colAdv) 
+    else if(colMonster==colAdv)
     {
-        if(lineMonster>lineAdv){ 
+        if(lineMonster>lineAdv){
 
             position ps = directionPosition(HAUT);
             if(g.nbElmtsPos(ps)<2)
@@ -213,17 +214,17 @@ position smartMonsterMoveManager::possiblePosition(ground&g)
                 pos = ps;
             }
             else{
-                pos={-1,-1};
+                pos=posError;
             }
         }
-        else{ 
+        else{
             position ps = directionPosition(BAS);
             if(g.nbElmtsPos(ps)<2)
             {
                 pos = ps;
             }
             else{
-                pos={-1,-1};
+                pos=posError;
             }
         }
     }
@@ -272,15 +273,15 @@ void smartMonsterMoveManager::deplacementProche(ground&g)
             }
 
 
-            char t = g.typeOf(indice);
+            char typeCase = g.typeOf(indice);
             auto monster = dynamic_cast<smartMonster*>(g.getElementsTable()[indiceMonstre].get());
 
 
-            if(t=='E') //case vide
+            if(typeCase==VIDE)
             {
                 monster->changePosition(p);
             }
-            else if((t=='P' &&g.nbElmtsPos(p)<2 )||( p.getLine()== getPos().getLine() && p.getColumn()==getPos().getColumn()))
+            else if((typeCase==AVENTURIER &&g.nbElmtsPos(p)<2 )||( p.getLine()== getPos().getLine() && p.getColumn()==getPos().getColumn()))
             {
                 int indiceAdv = g.getIndiceAdventurer();
 
@@ -290,7 +291,6 @@ void smartMonsterMoveManager::deplacementProche(ground&g)
 
                 //LE MONSTRE LANCE UNE ATTAQUE
                 monsterAttackManager mnstrAttackManager;
-
                 double force = monster->attack(mnstrAttackManager);
 
                 // L'ADV RECOIT L ATTAQUE
@@ -306,8 +306,8 @@ void smartMonsterMoveManager::deplacementAleatoire(ground &g)
 {
     int dirAleat =  directionAleatoire();
        position p{directionPosition(dirAleat)};
-       
-       
+
+
         int nbElm= g.nbElmtsPos(p);
 
         if(nbElm<2 && p.getColumn()<g.getNbColumns()&& p.getColumn()>=0 && p.getLine()<g.getNbLines() && p.getLine()>=0)
@@ -321,7 +321,7 @@ void smartMonsterMoveManager::deplacementAleatoire(ground &g)
 
 
 
-            if(t=='E') // CASE VIDE => LE MONSTRE Y VA
+            if(t==VIDE)
             {
                 monster->changePosition(p);
             }
@@ -335,13 +335,13 @@ void smartMonsterMoveManager::deplacementAleatoire(ground &g)
 void smartMonsterMoveManager::move(ground &g,int direction)
 {
 
-    if(isNearAdventurer(g)) 
+    if(isNearAdventurer(g))
     {
         deplacementProche(g);
-      
+
     }
-    else{ 
-        deplacementAleatoire(g);       
+    else{
+        deplacementAleatoire(g);
     }
 
 

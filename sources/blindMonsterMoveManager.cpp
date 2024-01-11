@@ -121,13 +121,13 @@ void blindMonsterMoveManager::move(ground &g, int direction)
             }
         }
 
-        char t=g.typeOf(indiceNouv);
+        char typeCase=g.typeOf(indiceNouv);
 
-        if(t=='E') // CASE VIDE => LE MONSTRE Y VA
+        if(typeCase==VIDE)
         {
             monster->changePosition(nouvPos);
         }
-        else if((t=='P' && g.nbElmtsPos(nouvPos)<2 )||(nouvPos.getLine()== getPos().getLine() && nouvPos.getColumn()==getPos().getColumn()))
+        else if((typeCase==AVENTURIER && g.nbElmtsPos(nouvPos)<2 )||(nouvPos.getLine()== getPos().getLine() && nouvPos.getColumn()==getPos().getColumn()))
         {
             monster->changePosition(nouvPos);
 
