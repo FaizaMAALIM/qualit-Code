@@ -1,6 +1,5 @@
 #include <iostream>
 #include "game.h"
-#include "menu.h"
 #include "ground.h"
 #include "viewManager.h"
 #include "CLIView.h"
